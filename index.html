@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>《五感山徑》逛展攻略｜佑在幹嘛</title>
+<meta name="description" content="桃園市立圖書館《五感山徑》逛展攻略：今天開不開、出發前三件事、五條山徑怎麼看、還沒開始的活動場次。由佑在幹嘛整理。">
+<meta property="og:title" content="《五感山徑》逛展攻略｜佑在幹嘛">
+<meta property="og:description" content="會讓你白跑一趟的資訊、現場容易錯過的東西，以及怎麼跟小孩一起看才不會走馬看花。">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#604C3F">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233D5A3F'/%3E%3Cpath d='M8 50 L22 26 L32 40 L42 20 L56 50 Z' fill='%23A8B79A'/%3E%3Cpath d='M8 50 L20 36 L30 48 L44 32 L56 50 Z' fill='%23FAF8F3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ============ 基礎 ============ */
+:root{
+  --brown:#604C3F;
+  --brown-d:#43352B;
+  --green:#3D5A3F;
+  --moss:#7A8C6B;
+  --moss-l:#A8B79A;
+  --orange:#D9822B;
+  --cream:#FAF8F3;
+  --cream-d:#F1ECE1;
+  --ink:#2E2620;
+  --ink-2:#5C5147;
+  --line:rgba(96,76,63,.16);
+  --ok:#3D7A4E;
+  --stop:#B3402E;
+  --r:12px;
+  --sh:0 2px 10px rgba(67,53,43,.07);
+  --sh-l:0 12px 34px rgba(67,53,43,.14);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:"Noto Sans TC","PingFang TC","Heiti TC",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--cream);color:var(--ink);
+  font-size:16px;line-height:1.8;letter-spacing:.02em;
+  overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+a{color:var(--green);text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:6px}
+
+.wrap{width:100%;max-width:680px;margin:0 auto;padding:0 20px}
+section{position:relative}
+.sec{padding:56px 0}
+.sec + .sec{border-top:1px solid var(--line)}
+
+/* ============ 進度條 + 導覽 ============ */
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--moss),var(--green),var(--orange));z-index:90;transition:width .1s linear}
+
+#topnav{
+  position:fixed;top:0;left:0;right:0;z-index:80;
+  background:rgba(250,248,243,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid transparent;
+  transform:translateY(-104%);transition:transform .45s var(--ease),border-color .3s;
+}
+#topnav.on{transform:translateY(0);border-bottom-color:var(--line)}
+.nav-in{max-width:680px;margin:0 auto;padding:9px 16px;display:flex;align-items:center;gap:10px}
+.nav-logo{flex:none;font-weight:900;font-size:14px;color:var(--brown);white-space:nowrap;letter-spacing:.04em;padding-right:10px;border-right:1px solid var(--line)}
+.nav-scroll{flex:1;min-width:0;display:flex;gap:6px;padding-left:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;mask-image:linear-gradient(90deg,#000 0,#000 90%,transparent)}
+.nav-scroll::-webkit-scrollbar{display:none}
+.nav-scroll button{
+  font-size:12.5px;font-weight:500;color:var(--ink-2);white-space:nowrap;
+  padding:5px 11px;border-radius:999px;transition:.25s var(--ease);border:1px solid transparent;
+}
+.nav-scroll button.act{background:var(--green);color:#fff;border-color:var(--green)}
+.nav-scroll button:hover{background:var(--cream-d)}
+.nav-scroll button.act:hover{background:var(--green)}
+
+/* ============ HERO ============ */
+#hero{
+  min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
+  position:relative;overflow:hidden;background:linear-gradient(#F6F2E7 0%,#EFEADC 46%,#E4E3D2 100%);
+  padding-bottom:58px;
+}
+#hero canvas{position:absolute;inset:0;width:100%;height:100%}
+.mts{position:absolute;left:0;right:0;bottom:0;height:62%;pointer-events:none}
+.mts svg{position:absolute;bottom:0;left:-6%;width:112%;height:100%}
+.hero-in{position:relative;z-index:3;text-align:center}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;letter-spacing:.16em;
+  color:var(--green);background:rgba(255,255,255,.72);border:1px solid rgba(61,90,63,.24);
+  padding:6px 14px;border-radius:999px;margin-bottom:18px;box-shadow:var(--sh);
+}
+.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--orange);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+h1.big{
+  font-size:clamp(34px,10.5vw,58px);line-height:1.14;font-weight:900;color:var(--brown-d);
+  letter-spacing:-.01em;margin-bottom:12px;
+}
+h1.big .l{display:block;overflow:hidden}
+h1.big .l span{display:block;animation:rise .9s var(--ease) both}
+h1.big .l:nth-child(2) span{animation-delay:.1s}
+@keyframes rise{from{transform:translateY(105%)}to{transform:translateY(0)}}
+.sub{font-size:15px;color:var(--ink-2);font-weight:500;margin-bottom:22px;animation:fade .8s .35s both}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.cdrow{
+  display:inline-flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);
+  border-radius:999px;padding:9px 8px 9px 18px;box-shadow:var(--sh-l);margin-bottom:22px;
+  animation:fade .8s .5s both;
+}
+.cdrow b{font-size:26px;font-weight:900;color:var(--green);font-variant-numeric:tabular-nums;line-height:1}
+.cdrow.urgent b{color:var(--stop)}
+.cdrow small{font-size:12.5px;color:var(--ink-2);font-weight:500}
+.free{background:var(--green);color:#fff;font-size:12px;font-weight:700;padding:6px 13px;border-radius:999px}
+.lead{
+  font-size:15px;line-height:1.95;color:var(--ink-2);text-align:left;
+  background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.9);backdrop-filter:blur(6px);
+  border-left:3px solid var(--moss);padding:16px 18px;border-radius:var(--r);
+  box-shadow:var(--sh);animation:fade .8s .65s both;
+}
+.by{margin-top:14px;font-size:13px;font-weight:700;color:var(--brown);animation:fade .8s .8s both}
+.scrollcue{
+  position:absolute;bottom:10px;left:50%;transform:translateX(-50%);z-index:4;
+  font-size:11px;letter-spacing:.2em;color:var(--ink-2);opacity:.75;
+  display:flex;flex-direction:column;align-items:center;gap:5px;animation:bob 2.2s infinite;
+}
+.scrollcue::after{content:"";width:1px;height:22px;background:linear-gradient(var(--ink-2),transparent)}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,7px)}}
+
+/* ============ 標題 ============ */
+.tag{
+  display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:.18em;
+  color:var(--moss);margin-bottom:9px;text-transform:uppercase;
+}
+.tag::before{content:"";width:22px;height:2px;background:var(--moss);border-radius:2px}
+h2{font-size:clamp(24px,6.4vw,31px);line-height:1.3;font-weight:900;color:var(--brown-d);margin-bottom:12px;letter-spacing:-.01em}
+.intro{font-size:15px;color:var(--ink-2);line-height:1.95;margin-bottom:26px}
+.intro strong{color:var(--brown-d)}
+
+/* 捲動揭示 */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* ============ S2 今天開不開 ============ */
+#s2{background:linear-gradient(180deg,var(--cream) 0%,#F4F1E6 100%)}
+.statuscard{
+  position:relative;overflow:hidden;border-radius:20px;padding:26px 22px;color:#fff;
+  box-shadow:var(--sh-l);margin-bottom:16px;
+}
+.statuscard.open{background:linear-gradient(135deg,#3D7A4E,#2F5F3D)}
+.statuscard.soon{background:linear-gradient(135deg,#4E7B8C,#3B5F6E)}
+.statuscard.closed{background:linear-gradient(135deg,#8C6A4E,#6B4F3A)}
+.statuscard.stop{background:linear-gradient(135deg,#B3402E,#8A2F22)}
+.statuscard.end{background:linear-gradient(135deg,#6E675E,#4A443D)}
+.statuscard::after{
+  content:"";position:absolute;right:-40px;top:-40px;width:190px;height:190px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.16),transparent 68%);
+}
+.sc-date{font-size:12.5px;opacity:.86;font-weight:500;letter-spacing:.06em;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.dot-live{width:8px;height:8px;border-radius:50%;background:#8CF5A9;box-shadow:0 0 0 0 rgba(140,245,169,.8);animation:live 1.8s infinite}
+@keyframes live{0%{box-shadow:0 0 0 0 rgba(255,255,255,.6)}70%{box-shadow:0 0 0 12px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+.sc-head{font-size:clamp(26px,7.4vw,34px);font-weight:900;line-height:1.22;margin-bottom:8px;position:relative;z-index:2}
+.sc-body{font-size:14.5px;line-height:1.8;opacity:.95;position:relative;z-index:2}
+.sc-body b{font-variant-numeric:tabular-nums}
+.sc-meter{margin-top:18px;position:relative;z-index:2}
+.sc-meter .track{height:7px;border-radius:99px;background:rgba(255,255,255,.26);overflow:hidden}
+.sc-meter .fill{height:100%;border-radius:99px;background:#fff;width:0;transition:width 1.2s var(--ease)}
+.sc-meter .lbl{display:flex;justify-content:space-between;font-size:11px;opacity:.85;margin-top:6px;font-variant-numeric:tabular-nums}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.mini{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:13px 14px;box-shadow:var(--sh);transition:.3s var(--ease)}
+.mini:hover{transform:translateY(-3px);box-shadow:var(--sh-l)}
+.mini .k{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--moss);margin-bottom:4px}
+.mini .v{font-size:14px;font-weight:700;color:var(--brown-d);font-variant-numeric:tabular-nums;line-height:1.5}
+.warnbox{
+  background:#FFF6E9;border:1px solid rgba(217,130,43,.35);border-left:4px solid var(--orange);
+  border-radius:var(--r);padding:14px 16px;font-size:14.5px;line-height:1.8;color:#7A4A12;
+}
+.warnbox b{color:#8A4A0B}
+.daychips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.daychip{
+  background:#fff;border:1px solid rgba(217,130,43,.4);color:#8A4A0B;border-radius:999px;
+  padding:5px 12px;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;
+}
+
+/* ============ S3 檢查清單 ============ */
+.checkwrap{display:flex;flex-direction:column;gap:12px}
+.chk{
+  position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r);
+  padding:16px 16px 16px 56px;cursor:pointer;transition:.32s var(--ease);box-shadow:var(--sh);
+  text-align:left;width:100%;display:block;
+}
+.chk:hover{transform:translateY(-2px);box-shadow:var(--sh-l);border-color:var(--moss-l)}
+.chk .box{
+  position:absolute;left:16px;top:17px;width:26px;height:26px;border-radius:8px;
+  border:2px solid var(--moss-l);display:grid;place-items:center;transition:.3s var(--ease);
+}
+.chk .box svg{width:15px;height:15px;stroke:#fff;stroke-width:3.4;fill:none;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:22;stroke-dashoffset:22;transition:stroke-dashoffset .35s .05s var(--ease)}
+.chk.done{background:#F3F7F1;border-color:rgba(61,122,78,.4)}
+.chk.done .box{background:var(--ok);border-color:var(--ok);transform:scale(1.06)}
+.chk.done .box svg{stroke-dashoffset:0}
+.chk .t{display:block;font-size:16.5px;font-weight:700;color:var(--brown-d);margin-bottom:6px;line-height:1.5;transition:.3s}
+.chk.done .t{color:var(--ok)}
+.chk .d{display:block;font-size:14.5px;color:var(--ink-2);line-height:1.85;font-style:normal}
+.chk .d strong{color:var(--brown-d)}
+.note{
+  display:block;margin-top:9px;font-size:13.5px;line-height:1.75;color:#8A4A0B;
+  background:#FFF6E9;border-radius:8px;padding:8px 11px;
+}
+.progressline{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.progressline .track{flex:1;height:6px;border-radius:99px;background:var(--cream-d);overflow:hidden}
+.progressline .fill{height:100%;width:0;background:linear-gradient(90deg,var(--moss),var(--ok));transition:width .5s var(--ease)}
+.progressline span{font-size:12.5px;font-weight:700;color:var(--moss);font-variant-numeric:tabular-nums;white-space:nowrap}
+.allgood{
+  margin-top:14px;background:var(--green);color:#fff;border-radius:var(--r);padding:14px 16px;
+  font-size:15px;font-weight:700;text-align:center;
+  opacity:0;transform:translateY(10px) scale(.97);transition:.5s var(--ease);pointer-events:none;height:0;padding:0;overflow:hidden;
+}
+.allgood.show{opacity:1;transform:none;height:auto;padding:14px 16px}
+
+/* ============ S4 五條山徑 ============ */
+.acc{display:flex;flex-direction:column;gap:10px}
+.item{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:.35s var(--ease);box-shadow:var(--sh)}
+.item.open{box-shadow:var(--sh-l);border-color:var(--moss-l)}
+.item-h{width:100%;display:flex;align-items:center;gap:14px;padding:16px;text-align:left}
+.icoshell{
+  width:46px;height:46px;flex:none;border-radius:13px;background:var(--cream-d);display:grid;place-items:center;
+  transition:.4s var(--ease);
+}
+.item.open .icoshell{background:var(--green);transform:rotate(-6deg) scale(1.05)}
+.icoshell svg{width:26px;height:26px;fill:none;stroke:var(--green);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:stroke .4s}
+.item.open .icoshell svg{stroke:#fff}
+.item-h .txt{flex:1;min-width:0}
+.item-h .n{display:block;font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--moss);line-height:1.4}
+.item-h .ttl{display:block;font-size:18px;font-weight:900;color:var(--brown-d);line-height:1.4}
+.item-h .hint{display:block;font-size:12.5px;color:var(--ink-2);margin-top:1px;line-height:1.5}
+.chev{width:22px;height:22px;flex:none;stroke:var(--moss);stroke-width:2.4;fill:none;stroke-linecap:round;transition:transform .4s var(--ease)}
+.item.open .chev{transform:rotate(180deg)}
+.item-b{max-height:0;overflow:hidden;transition:max-height .5s var(--ease)}
+.item-bi{padding:0 16px 18px}
+.blk{margin-bottom:14px}
+.blk:last-child{margin-bottom:0}
+.blk .bt{
+  display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;letter-spacing:.1em;
+  color:#fff;background:var(--moss);border-radius:999px;padding:3px 10px;margin-bottom:7px;
+}
+.blk.miss .bt{background:var(--orange)}
+.blk p{font-size:14.8px;line-height:1.9;color:var(--ink-2)}
+.blk p strong{color:var(--brown-d)}
+.kidq{background:#F1F4EE;border:1px dashed var(--moss);border-radius:var(--r);padding:14px 16px}
+.kidq .bt{background:var(--green)}
+.kidq q{display:block;font-size:16px;font-weight:700;color:var(--green);line-height:1.7;font-style:normal}
+
+/* ============ S5 翻卡 ============ */
+#s5{background:#F4F1E6}
+.flipgrid{display:grid;gap:12px}
+.flip{perspective:1400px;height:210px;cursor:pointer;width:100%;text-align:left}
+.flip-in{position:relative;width:100%;height:100%;transition:transform .68s var(--ease);transform-style:preserve-3d}
+.flip.on .flip-in{transform:rotateY(180deg)}
+.face{
+  position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:16px;padding:20px;display:flex;flex-direction:column;justify-content:center;box-shadow:var(--sh);
+}
+.front{background:#fff;border:1px solid var(--line);align-items:center;text-align:center;gap:12px}
+.front .num{font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--moss)}
+.front .q{font-size:23px;font-weight:900;color:var(--brown-d)}
+.front .tap{font-size:12px;color:var(--moss);display:flex;align-items:center;gap:6px}
+.front .tap i{width:16px;height:16px;border:2px solid var(--moss);border-radius:50%;animation:pulse 2s infinite}
+.back{background:linear-gradient(140deg,var(--green),#2E4630);color:#fff;transform:rotateY(180deg);border:1px solid var(--green)}
+.back p{font-size:14.5px;line-height:1.85}
+.back .re{margin-top:12px;font-size:11.5px;opacity:.75;letter-spacing:.1em}
+.flipicon{position:absolute;top:14px;right:16px;font-size:11px;letter-spacing:.14em;color:var(--moss)}
+
+/* ============ S6 動線 ============ */
+.switch{display:flex;background:var(--cream-d);border-radius:999px;padding:5px;gap:5px;margin-bottom:20px;position:relative}
+.switch button{flex:1;padding:11px 8px;border-radius:999px;font-size:14.5px;font-weight:700;color:var(--ink-2);position:relative;z-index:2;transition:color .35s}
+.switch button.on{color:#fff}
+.switch .glider{position:absolute;top:5px;bottom:5px;left:5px;width:calc(50% - 5px);background:var(--green);border-radius:999px;transition:transform .45s var(--ease);z-index:1}
+.switch.b .glider{transform:translateX(100%)}
+.timeline{position:relative;padding-left:34px}
+.timeline::before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:var(--cream-d);border-radius:2px}
+.timeline .prog{position:absolute;left:11px;top:8px;width:2px;background:var(--green);border-radius:2px;height:0;transition:height 1s var(--ease)}
+.step{position:relative;padding:9px 0;font-size:15.5px;color:var(--ink-2);line-height:1.7;opacity:0;transform:translateX(-10px);animation:slidein .5s var(--ease) forwards}
+@keyframes slidein{to{opacity:1;transform:none}}
+.step::before{
+  content:attr(data-n);position:absolute;left:-34px;top:11px;width:24px;height:24px;border-radius:50%;
+  background:#fff;border:2px solid var(--moss-l);color:var(--moss);font-size:12px;font-weight:700;
+  display:grid;place-items:center;transition:.3s var(--ease);
+}
+.step:hover::before{background:var(--green);border-color:var(--green);color:#fff;transform:scale(1.12)}
+.step:hover{color:var(--brown-d)}
+.step em{font-style:normal;color:var(--green);font-weight:700}
+.meta{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:700;color:var(--brown)}
+.tipbox{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-top:20px;box-shadow:var(--sh)}
+.tipbox h4{font-size:14px;font-weight:900;color:var(--brown-d);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.tipbox p{font-size:14.3px;line-height:1.9;color:var(--ink-2)}
+.tipbox p + p{margin-top:8px}
+
+/* ============ S7 活動 ============ */
+#s7{background:#F4F1E6}
+.filters{display:flex;gap:7px;overflow-x:auto;padding:2px 20px 12px;margin:0 -20px;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.fchip{
+  white-space:nowrap;background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:8px 15px;font-size:13.5px;font-weight:700;color:var(--ink-2);transition:.28s var(--ease);
+}
+.fchip:hover{border-color:var(--moss);transform:translateY(-2px)}
+.fchip.on{background:var(--brown);border-color:var(--brown);color:#fff;box-shadow:var(--sh)}
+.fchip b{font-weight:700;opacity:.55;margin-left:5px;font-size:12px}
+.daygroup{margin-bottom:22px}
+.dayhead{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;position:sticky;top:52px;z-index:5;
+  background:linear-gradient(#F4F1E6 72%,rgba(244,241,230,0));padding:8px 0 6px}
+.dayhead .dd{font-size:22px;font-weight:900;color:var(--brown-d);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.dayhead .dw{font-size:12.5px;font-weight:700;color:var(--moss)}
+.dayhead .dc{margin-left:auto;font-size:11.5px;font-weight:700;color:#8A4A0B;background:#FFF0DC;border-radius:999px;padding:3px 10px}
+.ev{
+  background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:15px 16px;margin-bottom:9px;
+  box-shadow:var(--sh);transition:.3s var(--ease);position:relative;overflow:hidden;
+  animation:pop .45s var(--ease) both;
+}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+.ev:hover{transform:translateY(-3px);box-shadow:var(--sh-l);border-color:var(--moss-l)}
+.ev::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--moss)}
+.ev[data-t="生態走讀"]::before{background:#4E8C5A}
+.ev[data-t="電影"]::before{background:#5E6E8C}
+.ev[data-t="講座"]::before{background:#8C7A4E}
+.ev[data-t="說故事"]::before{background:#C08A3E}
+.ev[data-t="工作坊"]::before{background:#8C5E7A}
+.ev[data-t="繪本劇場"]::before{background:#4E8C8C}
+.ev .top{display:flex;align-items:center;gap:8px;margin-bottom:7px;flex-wrap:wrap}
+.ev .type{font-size:11px;font-weight:700;letter-spacing:.08em;color:#fff;background:var(--moss);border-radius:999px;padding:3px 9px}
+.ev[data-t="生態走讀"] .type{background:#4E8C5A}
+.ev[data-t="電影"] .type{background:#5E6E8C}
+.ev[data-t="講座"] .type{background:#8C7A4E}
+.ev[data-t="說故事"] .type{background:#C08A3E}
+.ev[data-t="工作坊"] .type{background:#8C5E7A}
+.ev[data-t="繪本劇場"] .type{background:#4E8C8C}
+.ev .time{font-size:13.5px;font-weight:700;color:var(--brown-d);font-variant-numeric:tabular-nums}
+.ev .clash{font-size:11px;font-weight:700;color:#8A4A0B;background:#FFF0DC;border:1px solid rgba(217,130,43,.35);border-radius:999px;padding:2px 8px}
+.ev h3{font-size:16.5px;font-weight:700;color:var(--brown-d);line-height:1.55;margin-bottom:6px}
+.ev .sub2{font-size:13.3px;color:var(--ink-2);line-height:1.75}
+.ev .sub2 span{display:inline-flex;align-items:center;gap:4px;margin-right:12px}
+.ev .pt{margin-top:8px;font-size:12.5px;color:#8A4A0B;background:#FFF6E9;border-radius:8px;padding:7px 10px;line-height:1.7}
+.ev .go{
+  display:inline-flex;align-items:center;gap:6px;margin-top:11px;font-size:13.5px;font-weight:700;
+  color:var(--green);text-decoration:none;border:1px solid rgba(61,90,63,.3);border-radius:999px;padding:6px 14px;
+  transition:.25s var(--ease);
+}
+.ev .go:hover{background:var(--green);color:#fff;border-color:var(--green);gap:9px}
+.empty{background:#fff;border:1px dashed var(--moss-l);border-radius:var(--r);padding:28px 20px;text-align:center;color:var(--ink-2);font-size:15px;line-height:1.85}
+.clashlist{background:#FFF6E9;border:1px solid rgba(217,130,43,.35);border-radius:var(--r);padding:16px;margin-top:6px}
+.clashlist h4{font-size:14px;font-weight:900;color:#8A4A0B;margin-bottom:9px}
+.clashlist li{list-style:none;font-size:14px;line-height:1.9;color:#7A4A12;padding-left:20px;position:relative}
+.clashlist li::before{content:"";position:absolute;left:4px;top:13px;width:6px;height:6px;border-radius:50%;background:var(--orange)}
+.clashlist li b{font-variant-numeric:tabular-nums;color:#8A4A0B}
+
+/* ============ S8 ============ */
+#s8{background:linear-gradient(180deg,#3D5A3F,#2C4230);color:#fff;padding:76px 0 68px;overflow:hidden}
+#s8 .tag{color:var(--moss-l)}
+#s8 .tag::before{background:var(--moss-l)}
+.poem{font-size:clamp(19px,5vw,24px);line-height:2;font-weight:500;color:#fff}
+.poem strong{font-weight:900;display:block;margin-bottom:22px;font-size:clamp(22px,5.6vw,28px);line-height:1.6}
+.poem p{margin-bottom:20px;font-size:clamp(16px,4.2vw,18px);line-height:2.05;color:rgba(255,255,255,.88)}
+.poem p:last-of-type{margin-bottom:0}
+.poem em{font-style:normal;color:#E8C98A;font-weight:700}
+.final{margin-top:30px;font-size:clamp(20px,5.4vw,26px);font-weight:900;letter-spacing:.06em;color:#fff}
+.ctas{display:flex;flex-direction:column;gap:11px;margin-top:32px}
+.cta{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;text-decoration:none;
+  background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.24);border-radius:14px;
+  padding:16px 18px;color:#fff;transition:.3s var(--ease);
+}
+.cta:hover{background:#fff;color:var(--green);transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.2)}
+.cta .cl{display:block;font-size:15px;font-weight:700;line-height:1.5}
+.cta .cs{display:block;font-size:12.5px;opacity:.72;margin-top:2px;line-height:1.5}
+.cta.main{background:var(--orange);border-color:var(--orange)}
+.cta.main:hover{background:#fff;color:var(--orange)}
+.cta svg{width:20px;height:20px;flex:none;stroke:currentColor;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s}
+.cta:hover svg{transform:translateX(4px)}
+.stream{position:absolute;left:0;right:0;bottom:0;height:120px;opacity:.16;pointer-events:none}
+
+/* ============ S9 ============ */
+.info{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}
+.row{display:flex;border-bottom:1px solid var(--line);font-size:14.3px}
+.row:last-child{border-bottom:none}
+.row .k{flex:none;width:92px;padding:12px 14px;background:#FBF9F4;font-weight:700;color:var(--moss);font-size:13px}
+.row .v{flex:1;padding:12px 14px;color:var(--ink-2);line-height:1.75}
+.row .v a{font-weight:700;word-break:break-all}
+.actbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.abtn{
+  display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;
+  background:var(--brown);color:#fff;border-radius:var(--r);padding:14px;font-size:14.5px;font-weight:700;
+  transition:.28s var(--ease);
+}
+.abtn.alt{background:#fff;color:var(--brown);border:1px solid var(--line)}
+.abtn:hover{transform:translateY(-3px);box-shadow:var(--sh-l)}
+.abtn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+footer{background:var(--brown-d);color:rgba(255,255,255,.62);padding:34px 0 46px;font-size:12.8px;line-height:1.95}
+footer .fw{font-weight:900;color:#fff;font-size:15px;margin-bottom:12px;letter-spacing:.04em}
+footer p{margin-bottom:11px}
+footer hr{border:none;border-top:1px solid rgba(255,255,255,.14);margin:16px 0}
+
+/* 展覽已結束 */
+#endedbanner{display:none;background:var(--brown-d);color:#fff;text-align:center;padding:14px 20px;font-size:14px;font-weight:700;line-height:1.7}
+body.ended #endedbanner{display:block}
+body.ended .cdrow,body.ended #s7 .filters{display:none}
+
+/* 回頂 */
+#top{
+  position:fixed;right:16px;bottom:16px;z-index:70;width:46px;height:46px;border-radius:50%;
+  background:var(--brown);color:#fff;display:grid;place-items:center;box-shadow:var(--sh-l);
+  opacity:0;transform:scale(.6) translateY(10px);pointer-events:none;transition:.4s var(--ease);
+}
+#top.on{opacity:1;transform:none;pointer-events:auto}
+#top:hover{background:var(--green)}
+#top svg{width:20px;height:20px;stroke:#fff;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* toast */
+#toast{
+  position:fixed;left:50%;bottom:26px;transform:translate(-50%,26px);z-index:120;
+  background:var(--brown-d);color:#fff;font-size:13.5px;font-weight:700;padding:11px 20px;border-radius:999px;
+  box-shadow:var(--sh-l);opacity:0;pointer-events:none;transition:.4s var(--ease);
+}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* 桌機 */
+@media(min-width:720px){
+  .sec{padding:76px 0}
+  .flipgrid{grid-template-columns:repeat(3,1fr)}
+  .flip{height:250px}
+  body{font-size:16.5px}
+}
+@media(max-width:400px){
+  .grid2{grid-template-columns:1fr}
+  .actbtns{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none}
+  #hero canvas{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+
+<nav id="topnav" aria-label="區塊導覽">
+  <div class="nav-in">
+    <div class="nav-logo">五感山徑</div>
+    <div class="nav-scroll" id="navscroll"></div>
+  </div>
+</nav>
+
+<div id="endedbanner">《五感山徑》已於 2026/8/31 結束展出，本頁保留作為紀錄。</div>
+
+<!-- ============ S1 HERO ============ -->
+<header id="hero" data-nav="開場">
+  <canvas id="dust" aria-hidden="true"></canvas>
+  <div class="mts" aria-hidden="true">
+    <svg viewBox="0 0 1200 520" preserveAspectRatio="none" data-depth="0.012">
+      <path fill="#C9D0BC" d="M0 400 L150 250 L280 340 L420 190 L560 330 L700 230 L860 350 L1000 260 L1200 380 L1200 520 L0 520 Z"/>
+    </svg>
+    <svg viewBox="0 0 1200 520" preserveAspectRatio="none" data-depth="0.024">
+      <path fill="#A8B79A" d="M0 460 L180 330 L340 420 L500 290 L660 400 L820 320 L980 430 L1200 340 L1200 520 L0 520 Z"/>
+    </svg>
+    <svg viewBox="0 0 1200 520" preserveAspectRatio="none" data-depth="0.04">
+      <path fill="#7A8C6B" d="M0 500 L140 430 L300 490 L470 400 L640 480 L820 410 L1010 490 L1200 430 L1200 520 L0 520 Z"/>
+      <g fill="#5F7154">
+        <path d="M120 500 l14-46 14 46z"/><path d="M300 496 l12-40 12 40z"/><path d="M520 486 l16-52 16 52z"/>
+        <path d="M760 480 l13-44 13 44z"/><path d="M960 492 l15-48 15 48z"/><path d="M1090 486 l12-40 12 40z"/>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap hero-in">
+    <div class="eyebrow"><i></i>桃園市立圖書館總館・免費入場</div>
+    <h1 class="big"><span class="l"><span>《五感山徑》</span></span><span class="l"><span>逛展攻略</span></span></h1>
+    <p class="sub">臺灣森林的感官之旅｜1F 享讀拾光・3F 兒藝展示區</p>
+    <div class="cdrow" id="cdrow">
+      <small>展覽結束倒數</small>
+      <b id="cdnum">--</b>
+      <small>天</small>
+      <span class="free">免費入場</span>
+    </div>
+    <p class="lead">這份攻略不重複官方文宣。這裡只放三種東西：會讓你白跑一趟的資訊、現場容易錯過的東西，以及怎麼跟小孩一起看才不會走馬看花。</p>
+    <p class="by">by 佑在幹嘛</p>
+  </div>
+  <div class="scrollcue" aria-hidden="true">往下走</div>
+</header>
+
+<!-- ============ S2 今天開不開 ============ -->
+<section class="sec" id="s2" data-nav="今天開不開">
+  <div class="wrap">
+    <div class="rv">
+      <div class="tag">最重要的一句話</div>
+      <h2>今天開不開？</h2>
+      <p class="intro">總館的休館規則有兩層，錯的那天不是週一，是<strong>每個月最後一個週四</strong>。這裡直接幫你算好。</p>
+    </div>
+
+    <div class="statuscard rv" id="statuscard">
+      <div class="sc-date"><span class="dot-live"></span><span id="scdate">讀取中</span></div>
+      <div class="sc-head" id="schead">計算中…</div>
+      <div class="sc-body" id="scbody"></div>
+      <div class="sc-meter" id="scmeter" hidden>
+        <div class="track"><div class="fill" id="scfill"></div></div>
+        <div class="lbl"><span>08:30</span><span id="sclbl"></span><span id="scend">21:00</span></div>
+      </div>
+    </div>
+
+    <div class="grid2 rv">
+      <div class="mini"><div class="k">週二～週六</div><div class="v">08:30 – 21:00</div></div>
+      <div class="mini"><div class="k">週日、週一</div><div class="v">08:30 – 17:00</div></div>
+    </div>
+
+    <div class="warnbox rv">
+      這個暑假還有兩個<b>清館日</b>，這兩天不要去：
+      <div class="daychips" id="closedchips"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S3 出發前三件事 ============ -->
+<section class="sec" id="s3" data-nav="出發前">
+  <div class="wrap">
+    <div class="rv">
+      <div class="tag">Before You Go</div>
+      <h2>出發前先搞定三件事</h2>
+      <p class="intro">點一下卡片可以打勾，狀態會存在這台裝置上，出門前再開一次就知道還漏了什麼。</p>
+    </div>
+    <div class="progressline rv">
+      <div class="track"><div class="fill" id="ckfill"></div></div>
+      <span id="cktext">0 / 3</span>
+    </div>
+    <div class="checkwrap" id="checkwrap">
+
+      <button class="chk rv" data-k="1" aria-pressed="false">
+        <span class="box"><svg viewBox="0 0 24 24"><polyline points="4,12 10,18 20,6"/></svg></span>
+        <span class="t">① 進場自己領「森林護照」</span>
+        <span class="d">護照不是工作人員發的，要自己拿，很多人走完一整圈才發現。摺頁海報放在同一個位置，一起帶走。護照上的任務全部完成可以換小禮物。
+          <em class="note">⚠︎ 小禮物是否限量，以現場公告為準。想拿的話早一點去比較保險。</em>
+        </span>
+      </button>
+
+      <button class="chk rv" data-k="2" aria-pressed="false">
+        <span class="box"><svg viewBox="0 0 24 24"><polyline points="4,12 10,18 20,6"/></svg></span>
+        <span class="t">② 展區有兩層樓</span>
+        <span class="d">主展場在 <strong>1 樓「享讀拾光」</strong>，但味覺路線與部分內容延伸到 <strong>3 樓兒藝展示區</strong>。只逛一樓就離開的人非常多。上去看一下，五感才算走完。</span>
+      </button>
+
+      <button class="chk rv" data-k="3" aria-pressed="false">
+        <span class="box"><svg viewBox="0 0 24 24"><polyline points="4,12 10,18 20,6"/></svg></span>
+        <span class="t">③ 想參加活動，先確認閱讀點數</span>
+        <span class="d">展期內的 35 場推廣活動全部走 Accupass 線上報名，而且<strong>要扣桃市圖的閱讀點數</strong>，不是報名就好。報名多場會依活動時間依序扣點，點數不足會被系統直接取消名額。點數可以在圖書館官網或「桃園市立圖書館2.0」App 查詢。
+          <em class="note">⚠︎ 審核制活動一旦報名成功，不論有沒有出席，點數都不退。</em>
+        </span>
+      </button>
+
+    </div>
+    <div class="allgood" id="allgood">三件事都搞定了，可以出發了 🌿</div>
+  </div>
+</section>
+
+<!-- ============ S4 五條山徑 ============ -->
+<section class="sec" id="s4" data-nav="五條山徑">
+  <div class="wrap">
+    <div class="rv">
+      <div class="tag">The Five Trails</div>
+      <h2>五條山徑，一條一條拆</h2>
+      <p class="intro">這個展延續林業及自然保育署 2026 年度主題《阡陌之森》，由策展團隊「留白計畫」規劃，把林保署歷年累積的生態圖像從平面印刷變成可以走進去的空間。展場沿著五條感官路線鋪陳，點開看每一條。</p>
+    </div>
+    <div class="acc rv" id="acc"></div>
+  </div>
+</section>
+
+<!-- ============ S5 標本三問 ============ -->
+<section class="sec" id="s5" data-nav="標本三問">
+  <div class="wrap">
+    <div class="rv">
+      <div class="tag">Specimens</div>
+      <h2>標本觀察三問</h2>
+      <p class="intro">這次的標本是農業部生物多樣性研究所出借的 <strong>17 種臺灣動物</strong>，已知包含石虎、大冠鷲、白面鼯鼠、翠鳥，旁邊有完整的中英文解說。近距離看標本很難得，但只是「看過」很可惜。帶著這三個問題，一隻一隻對照，一隻標本可以聊五分鐘，而不是五秒。</p>
+    </div>
+    <div class="flipgrid rv" id="flipgrid"></div>
+  </div>
+</section>
+
+<!-- ============ S6 動線 ============ -->
+<section class="sec" id="s6" data-nav="動線">
+  <div class="wrap">
+    <div class="rv">
+      <div class="tag">Route</div>
+      <h2>你有多少時間？</h2>
+      <p class="intro">選一個版本，下面的路線會跟著換。兩種走法都從 1 樓領護照開始。</p>
+    </div>
+    <div class="switch rv" id="switch">
+      <div class="glider"></div>
+      <button class="on" data-r="a">快速版 60 分</button>
+      <button data-r="b">深度版 2.5 小時</button>
+    </div>
+    <div class="meta rv" id="routemeta"></div>
+    <div class="timeline rv" id="timeline"><div class="prog" id="tlprog"></div></div>
+
+    <div class="tipbox rv">
+      <h4>⏰ 什麼時候去最好</h4>
+      <p>週二到週六開到晚上九點，傍晚之後人明顯變少，展場也比較好拍。</p>
+      <p>週日與週一只開到下午五點，要去請早。</p>
+      <p>假日中午前後是親子人潮高峰，帶小小孩的話盡量避開。</p>
+    </div>
+    <div class="tipbox rv">
+      <h4>📚 別把繪本區當背景走過去</h4>
+      <p>展區裡有 40 多種生態繪本的選書區，很容易被當成背景走過去，但這才是圖書館辦展的意義。孩子在展場對哪一種動物特別有反應，就去書架上找那一種，當場坐下來讀完一本。看展的記憶會淡掉，一本自己挑的書會留著。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S7 活動 ============ -->
+<section class="sec" id="s7" data-nav="剩下的活動">
+  <div class="wrap">
+    <div class="rv">
+      <div class="tag">Events</div>
+      <h2>剩下的活動</h2>
+      <p class="intro">展期內總共 35 場推廣活動，這裡只列出<strong>還沒發生</strong>的場次。全部免費，但都要走 Accupass 報名並扣閱讀點數，額滿為止。同一天有兩場以上的場次時間會打架，我標出來了，排行程前先看一眼。</p>
+    </div>
+    <div class="listwrap">
+      <div class="filters rv" id="filters"></div>
+      <div id="eventlist"></div>
+      <div class="clashlist rv" id="clashlist"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S8 ============ -->
+<section id="s8" data-nav="走回溪流">
+  <div class="wrap">
+    <div class="rv">
+      <div class="tag">One More Thing</div>
+      <div class="poem">
+        <strong>展覽把森林搬進了城市，但森林本體還在外面。</strong>
+        <p>暑假結束之前，找一條有石頭、有淺灘、水是乾淨的溪，帶孩子把鞋子脫掉走進去，翻一翻石頭下面，看看有沒有蝦子跟螃蟹。</p>
+        <p>判斷一條溪健不健康，其實不需要儀器。溪邊如果有牠們，代表水是乾淨的。</p>
+        <p>而如果你在清晨或黃昏的溪邊，遇到一隻披著蓬鬆長毛、大白天出來抓螃蟹的小動物，那是<em>食蟹獴</em>，是科學家口中的環境指標物種。恭喜你，牠幫那條溪蓋了章。</p>
+        <div class="final">認識，是守護的第一步。</div>
+      </div>
+      <div class="ctas">
+        <a class="cta main" href="https://www.facebook.com/share/p/1CHtFqHDXJ/" id="videolink" target="_blank" rel="noopener">
+          <span><span class="cl">展覽任務活動</span><span class="cs">佑在幹嘛 Facebook 貼文</span></span>
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="cta" href="https://www.youdoyou.tw" id="channellink" target="_blank" rel="noopener">
+          <span><span class="cl">更多台灣的野生鄰居</span><span class="cs">佑在幹嘛官網 youdoyou.tw</span></span>
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <svg class="stream" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+    <path fill="none" stroke="#fff" stroke-width="2" d="M0 60 Q150 20 300 60 T600 60 T900 60 T1200 60"><animate attributeName="d" dur="9s" repeatCount="indefinite"
+      values="M0 60 Q150 20 300 60 T600 60 T900 60 T1200 60;M0 60 Q150 100 300 60 T600 60 T900 60 T1200 60;M0 60 Q150 20 300 60 T600 60 T900 60 T1200 60"/></path>
+    <path fill="none" stroke="#fff" stroke-width="1.4" d="M0 85 Q200 55 400 85 T800 85 T1200 85"><animate attributeName="d" dur="12s" repeatCount="indefinite"
+      values="M0 85 Q200 55 400 85 T800 85 T1200 85;M0 85 Q200 115 400 85 T800 85 T1200 85;M0 85 Q200 55 400 85 T800 85 T1200 85"/></path>
+  </svg>
+</section>
+
+<!-- ============ S9 ============ -->
+<section class="sec" id="s9" data-nav="展覽資訊">
+  <div class="wrap">
+    <div class="rv">
+      <div class="tag">Information</div>
+      <h2>展覽資訊</h2>
+    </div>
+    <div class="info rv" id="infotable"></div>
+    <div class="actbtns rv">
+      <a class="abtn" href="https://www.google.com/maps/search/?api=1&query=%E6%A1%83%E5%9C%92%E5%B8%82%E7%AB%8B%E5%9C%96%E6%9B%B8%E9%A4%A8%E7%B8%BD%E9%A4%A8" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>導航到總館
+      </a>
+      <a class="abtn alt" href="tel:033166345">
+        <svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a1.5 1.5 0 0 1-1.7 1.5A16.5 16.5 0 0 1 3.5 5.7 1.5 1.5 0 0 1 5 4z"/></svg>撥打 03-316-6345
+      </a>
+    </div>
+    <div class="actbtns rv" style="margin-top:10px">
+      <a class="abtn alt" href="https://www.typl.gov.tw/zh-tw/Activity/Content/9716" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>官方活動頁
+      </a>
+      <button class="abtn alt" id="sharebtn">
+        <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>分享這頁
+      </button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fw">佑在幹嘛</div>
+    <p>從生態認識台灣，從食物豐富生態。<br><a href="https://www.youdoyou.tw" target="_blank" rel="noopener" style="color:#E8C98A;font-weight:700">youdoyou.tw</a></p>
+    <hr>
+    <p>本頁資訊整理自主辦單位公開資料與媒體報導，展區內容、活動場次與名額可能調整，實際狀況以桃園市立圖書館官方公告為準。</p>
+    <p>資料查證日：2026/07/28</p>
+    <p>本頁由佑在幹嘛製作，與桃園市立圖書館《五感山徑》展覽合作。</p>
+  </div>
+</footer>
+
+<button id="top" aria-label="回到頂端"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<div id="toast" role="status"></div>
+
+<script>
+"use strict";
+/* ==================== 資料 ==================== */
+const EXHIBITION_END = "2026-08-31";
+const OPEN_START = "2026-07-01";
+const CLOSED_DATES = ["2026-07-30","2026-08-27"];      // 清館日
+const HOLIDAYS = [];                                    // 國定假日（需手動維護）
+const LINKS = {
+  main:"https://www.typl.gov.tw/zh-tw/Activity/Content/9716",
+  "生態走讀":"https://www.typl.gov.tw/zh-tw/Activity/Content/9799",
+  "電影":"https://www.typl.gov.tw/zh-tw/Activity/Content/9800",
+  "講座":"https://www.typl.gov.tw/zh-tw/Activity/Content/9801",
+  "說故事":"https://www.typl.gov.tw/zh-tw/Activity/Content/9857",
+  "工作坊":"https://www.typl.gov.tw/zh-tw/Activity/Content/9839",
+  "繪本劇場":"https://www.accupass.com/event/2606260917193850285790",
+  fb:"https://www.facebook.com/typlib"
+};
+const EVENTS = [
+  { id:"s1", type:"說故事", title:"凝視森林｜一座會呼吸的臺灣山林", host:"菊芬老師", book:"《我們的森林》", date:"2026-07-31", start:"10:00", end:"12:00", venue:"總館", conflict:false },
+  { id:"s2", type:"說故事", title:"聽見森林｜山徑裡的鳥鳴、風聲與腳步聲", host:"菊芬老師", book:"《森林裡的小圓》", date:"2026-07-31", start:"13:30", end:"15:30", venue:"總館", conflict:false },
+  { id:"w1", type:"生態走讀", title:"潛入花草星球！三洽水秘境散策", host:"三洽水環境教育中心", date:"2026-08-01", start:"14:00", end:"17:00", venue:"三洽水環境教育中心", conflict:true },
+  { id:"k1", type:"工作坊", title:"台灣特有種菇菇的五感食育體驗", host:"滴滴兒森 Maomao 老師 & Lala 老師", date:"2026-08-01", start:"14:00", end:"16:00", venue:"3F 親子小學堂", conflict:true },
+  { id:"t1", type:"講座", title:"猴來猴趣—我們與台灣獼猴的距離", host:"台灣獼猴共存推廣協會 秘書長 林美吟", date:"2026-08-02", start:"10:00", end:"12:00", venue:"1F 微光廳", conflict:false },
+  { id:"w2", type:"生態走讀", title:"東眼山昆蟲大解密與夏日蟲蟲饗宴", host:"東眼山自然教育中心環境教育教師", date:"2026-08-02", start:"12:30", end:"18:30", venue:"東眼山自然教育中心", conflict:false },
+  { id:"m1", type:"電影", title:"主題電影放映《老鷹想飛》", host:"", date:"2026-08-09", start:"14:00", end:"15:30", venue:"1F 微光廳", conflict:true },
+  { id:"k2", type:"工作坊", title:"森林探險家｜親子五感創作（場次1）", host:"milk kids 牛奶小孩", date:"2026-08-09", start:"13:00", end:"15:00", venue:"3F 親子小學堂", conflict:true },
+  { id:"k3", type:"工作坊", title:"森林探險家｜親子五感創作（場次2）", host:"milk kids 牛奶小孩", date:"2026-08-09", start:"15:00", end:"17:00", venue:"3F 親子小學堂", conflict:true },
+  { id:"k4", type:"工作坊", title:"探索大自然裡的寶藏｜植物遊樂園（場次1）", host:"緒咖啡 飯糰老師", date:"2026-08-09", start:"13:00", end:"15:00", venue:"711 會議室", conflict:true },
+  { id:"k5", type:"工作坊", title:"探索大自然裡的寶藏｜植物遊樂園（場次2）", host:"緒咖啡 飯糰老師", date:"2026-08-09", start:"15:00", end:"17:00", venue:"711 會議室", conflict:true },
+  { id:"w3", type:"生態走讀", title:"小小攀樹家：新勢公園攀樹之旅", host:"荒野保護協會", date:"2026-08-15", start:"09:00", end:"12:00", venue:"新勢公園", conflict:false },
+  { id:"k6", type:"工作坊", title:"魔法造紙術｜植感手抄紙工作坊（場次1）", host:"日出小姐", date:"2026-08-15", start:"13:00", end:"15:00", venue:"3F 親子小學堂", conflict:false },
+  { id:"k7", type:"工作坊", title:"魔法造紙術｜植感手抄紙工作坊（場次2）", host:"日出小姐", date:"2026-08-15", start:"15:00", end:"17:00", venue:"3F 親子小學堂", conflict:true },
+  { id:"m2", type:"電影", title:"兒童電影放映《羅雷司》", host:"", date:"2026-08-15", start:"16:00", end:"18:00", venue:"3F 小故事劇場", conflict:true },
+  { id:"t2", type:"講座", title:"熱血探險家出任務！從台灣山林到熱帶雨林的生態大冒險", host:"金鐘入圍節目主持人 熱血阿傑 黃仕傑", date:"2026-08-16", start:"10:00", end:"12:00", venue:"1F 微光廳", conflict:false },
+  { id:"s3", type:"說故事", title:"嗅聞森林｜樹木、葉子與土地的氣味記憶", host:"毛怪和朋友們", book:"《樹木真重要》", date:"2026-08-21", start:"13:00", end:"15:00", venue:"總館", conflict:false },
+  { id:"s4", type:"說故事", title:"觸摸森林｜來自森林的禮物", host:"毛怪和朋友們", book:"《來自森林的禮物》", date:"2026-08-21", start:"15:00", end:"17:00", venue:"總館", conflict:false },
+  { id:"m3", type:"電影", title:"兒童電影放映《森林特攻隊》", host:"", date:"2026-08-22", start:"16:00", end:"18:00", venue:"3F 小故事劇場", conflict:false },
+  { id:"s5", type:"說故事", title:"童話森林｜會說故事的小木貓", host:"語婕老師", book:"《外公家的小木貓》", date:"2026-08-23", start:"10:00", end:"12:00", venue:"總館", conflict:false },
+  { id:"s6", type:"說故事", title:"守護森林｜大樹與動物的家", host:"語婕老師", book:"《大樹是寶》", date:"2026-08-23", start:"13:30", end:"15:30", venue:"總館", conflict:true },
+  { id:"p1", type:"繪本劇場", title:"兒童繪本劇場《你看過臺灣大山嗎？》", host:"路歧合作社", date:"2026-08-23", start:"14:00", end:"16:00", venue:"1F 微光廳", conflict:true, note:"需扣閱讀點數：單人 20 點、雙人 35 點、三人 50 點、家庭四人 60 點" }
+];
+
+const TRAILS = [
+  { n:"①", name:"視覺山徑", hint:"先抬頭，最漂亮的在頭頂",
+    icon:'<path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+    has:"一進場最明顯的是大型森林情境布置，立體花卉、苔蘚造景，天花板垂掛下來的臺灣森林地景插畫。展區另外用月份與區域整理了保育軸帶。",
+    miss:"<strong>天花板。</strong>多數人進場之後視線是平的，但這個展最漂亮的部分在頭頂上。先抬頭，再往前走。那些插畫畫的是臺灣不同地區的自然樣貌，從山林、河川一路到濕地。",
+    q:"你覺得哪一張圖裡面的地方，是我們去過的？" },
+  { n:"②", name:"聽覺山徑", hint:"同一支鼓要連敲三下",
+    icon:'<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><path d="M4 14a2.5 2.5 0 0 0 2.5 2.5h.5V12h-1A2 2 0 0 0 4 14z"/><path d="M20 14a2.5 2.5 0 0 1-2.5 2.5H17V12h1a2 2 0 0 1 2 2z"/><path d="M17 16.5V18a2.5 2.5 0 0 1-2.5 2.5H12"/>',
+    has:"五種木材做成的木鼓，敲下去每一種的聲音密度都不一樣。已公開的樹種包含臺灣紅檜、臺灣杉、臺灣二葉松與相思木。旁邊是自然聲景區，可以聽到白耳畫眉、莫氏樹蛙的叫聲。",
+    miss:"不要只敲一下就走。<strong>同一支鼓連續敲三下</strong>，再換下一支，差別才聽得出來。木頭越密，聲音越高越短，越鬆散的聲音越低越長。",
+    q:"哪一種木頭的聲音最低沉？你猜那棵樹長得比較快還是比較慢？" },
+  { n:"③", name:"觸覺山徑", hint:"別讓積木吃掉全部時間",
+    icon:'<path d="M7.5 12V5.5a1.6 1.6 0 0 1 3.2 0V11"/><path d="M10.7 11V4.6a1.6 1.6 0 0 1 3.2 0V11"/><path d="M13.9 11.4V6.6a1.6 1.6 0 0 1 3.2 0V14a6.4 6.4 0 0 1-6.4 6.4h-.7A6 6 0 0 1 4 14.4l-.4-1a1.6 1.6 0 0 1 2.6-1.8l1.3 1.6"/>',
+    has:"樹皮觸摸區保留了不同樹種真實的紋理。另外有「積木森林」，各種材質、重量、形狀的木頭積木可以自由堆疊挑戰平衡。旁邊有紅檜的年輪剖面，一圈一圈完整攤開。",
+    miss:"<strong>年輪。</strong>小孩會被積木吸走全部注意力，大人記得把他拉過來看一眼年輪，然後告訴他，這些線每一圈是一年，數一數這棵樹活了幾歲。",
+    q:"這兩塊一樣大的木頭，為什麼一塊比較重？" },
+  { n:"④", name:"嗅覺山徑", hint:"不按黑球就聞不到",
+    icon:'<path d="M12 3c-1.2 3-3.4 4.6-3.4 7.6a3.4 3.4 0 0 0 6.8 0C15.4 7.6 13.2 6 12 3z"/><path d="M6 14.5c-1.6 1-2.4 2.2-2.4 3.4A2.6 2.6 0 0 0 6.2 20.5c1.4 0 2.3-.7 3-1.6"/><path d="M18 14.5c1.6 1 2.4 2.2 2.4 3.4a2.6 2.6 0 0 1-2.6 2.6c-1.4 0-2.3-.7-3-1.6"/>',
+    has:"嗅聞區陳列臺灣土肉桂、野薑花等植物香氣。",
+    miss:"<strong>這一區要動手。</strong>按壓黑色的球，再把鼻子靠近玻璃瓶，不按是聞不到的。很多人以為壞掉，站三秒就走了。",
+    q:"這個味道，讓你想到什麼地方？" },
+  { n:"⑤", name:"味覺山徑", hint:"整條路線都在三樓",
+    icon:'<path d="M6 3v8a2.5 2.5 0 0 0 5 0V3"/><path d="M8.5 11v10"/><path d="M17.5 3c-1.6 1.6-2.2 3.4-2.2 5.4 0 1.8.8 3.1 2.2 3.6V21"/>',
+    has:"展覽用刺蔥等野菜設計了創意食譜，把森林跟餐桌接起來。這條路線的延伸展區在三樓。",
+    miss:"<strong>整條路線。</strong>三樓不去就等於少走五分之一。",
+    q:"你敢不敢試試看山裡面長出來的東西？" }
+];
+
+const FLIPS = [
+  { n:"問題 01", q:"看牠的腳", a:"爪子是尖的還是鈍的？有沒有蹼？腳掌的肉墊厚不厚？腳決定了牠住在樹上、地上還是水邊。爬樹的爪子彎而尖，走地的比較鈍，常泡水的趾間會有蹼或特別長的趾。" },
+  { n:"問題 02", q:"看牠的眼睛長在哪", a:"眼睛長在正前方的通常是掠食者，牠需要判斷距離才抓得到獵物。眼睛長在頭兩側的通常是被吃的那一方，牠需要看得夠廣才逃得掉。看一眼眼睛的位置，就知道牠在食物鏈的哪一格。" },
+  { n:"問題 03", q:"看牠的毛色與花紋", a:"花紋不是為了漂亮，是為了在牠原本住的環境裡消失。想像這隻動物站在什麼背景前面會突然變得很難被發現，那個背景就是牠的家。" }
+];
+
+const ROUTES = {
+  a:{ label:"快速版", time:"約 60 分鐘", tag:"時間有限",
+      steps:["1 樓入口領<em>森林護照</em>與摺頁","視覺區，先<em>抬頭</em>看地景插畫","標本區，用三個問題挑兩隻看","積木森林","嗅聞區，記得<em>按球</em>","上 <em>3 樓</em>味覺區","回 1 樓完成護照"] },
+  b:{ label:"深度版", time:"約 2.5 小時", tag:"建議親子",
+      steps:["1 樓領<em>森林護照</em>","視覺區，把保育軸帶的月份區塊慢慢看完","標本區，三個問題逐隻對照","木鼓與自然聲景區","樹皮觸摸與紅檜年輪","積木森林（小孩會待很久，大人可以先去旁邊繪本區挑書）","嗅聞區","上 <em>3 樓</em>味覺展區","回到 1 樓繪本區，讓孩子挑一本剛剛看過的動物，坐下來讀完"] }
+};
+
+const INFO = [
+  ["展覽名稱","五感山徑：臺灣森林的感官之旅"],
+  ["展覽期間","2026/07/01（三）～ 08/31（一）"],
+  ["展覽地點","桃園市立圖書館總館 1 樓享讀拾光、3 樓兒藝展示區"],
+  ["地址",'<a href="https://www.google.com/maps/search/?api=1&query=330056%E6%A1%83%E5%9C%92%E5%B8%82%E6%A1%83%E5%9C%92%E5%8D%80%E5%8D%97%E5%B9%B3%E8%B7%AF303%E8%99%9F" target="_blank" rel="noopener">330056 桃園市桃園區南平路 303 號</a>'],
+  ["電話",'<a href="tel:033166345">(03) 316-6345</a>'],
+  ["開館時間","週二～週六 08:30–21:00；週日、週一 08:30–17:00"],
+  ["休館日","國定假日、每月最後一個週四清館日"],
+  ["參觀費用","免費"],
+  ["年度主題","延續林業及自然保育署 2026 年度主題《阡陌之森》"],
+  ["主辦單位","桃園市立圖書館"],
+  ["合作單位","農業部林業及自然保育署新竹分署、農業部生物多樣性研究所"],
+  ["策展團隊","留白計畫"],
+  ["官方活動頁",'<a href="'+LINKS.main+'" target="_blank" rel="noopener">typl.gov.tw／活動頁 9716</a>'],
+  ["圖書館粉專",'<a href="'+LINKS.fb+'" target="_blank" rel="noopener">facebook.com/typlib</a>']
+];
+
+/* ==================== 工具 ==================== */
+const $ = (s,r)=> (r||document).querySelector(s);
+const $$ = (s,r)=> Array.from((r||document).querySelectorAll(s));
+const RM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const WD = ["日","一","二","三","四","五","六"];
+const pad = n => String(n).padStart(2,"0");
+const ymd = d => d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+const parse = s => { const p=s.split("-").map(Number); return new Date(p[0],p[1]-1,p[2]); };
+const mins = t => { const p=t.split(":").map(Number); return p[0]*60+p[1]; };
+
+// 允許用 ?date=2026-08-27&time=19:00 測試
+const QS = new URLSearchParams(location.search);
+function now(){
+  const d = QS.get("date") ? parse(QS.get("date")) : new Date();
+  if(QS.get("time")){ const p=QS.get("time").split(":").map(Number); d.setHours(p[0],p[1]||0,0,0); }
+  else if(QS.get("date")){ const r=new Date(); d.setHours(r.getHours(),r.getMinutes(),0,0); }
+  return d;
+}
+function lastThursday(d){
+  const last = new Date(d.getFullYear(), d.getMonth()+1, 0);
+  while(last.getDay()!==4) last.setDate(last.getDate()-1);
+  return last;
+}
+function toast(msg){
+  const t=$("#toast"); t.textContent=msg; t.classList.add("on");
+  clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("on"),2200);
+}
+function track(name,detail){
+  if(typeof window.gtag==="function") window.gtag("event",name,detail||{});
+  window.dataLayer=window.dataLayer||[]; window.dataLayer.push(Object.assign({event:name},detail||{}));
+}
+
+/* ==================== S1 倒數 ==================== */
+(function(){
+  const end = parse(EXHIBITION_END), t = now();
+  const days = Math.ceil((end - new Date(t.getFullYear(),t.getMonth(),t.getDate()))/86400000);
+  const num = $("#cdnum");
+  if(days < 0){ document.body.classList.add("ended"); return; }
+  const target = Math.max(days,0);
+  if(target<=7) $("#cdrow").classList.add("urgent");
+  if(RM){ num.textContent=target; return; }
+  let cur=0; const step = Math.max(1,Math.round(target/28));
+  const iv=setInterval(()=>{ cur=Math.min(cur+step,target); num.textContent=cur; if(cur>=target) clearInterval(iv); },28);
+})();
+
+/* ==================== S2 今天開不開 ==================== */
+// 這一天是否休館（清館日 / 國定假日）
+function isClosedDay(d){
+  const s = ymd(d);
+  return CLOSED_DATES.indexOf(s)>=0 || HOLIDAYS.indexOf(s)>=0 || ymd(lastThursday(d))===s;
+}
+// 下一個有開、而且還在展期內的日子
+function nextOpenDay(d){
+  const n = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  for(let i=0;i<40;i++){
+    n.setDate(n.getDate()+1);
+    if(ymd(n) > EXHIBITION_END) return null;
+    if(!isClosedDay(n)) return n;
+  }
+  return null;
+}
+function nextOpenText(d){
+  const n = nextOpenDay(d);
+  if(!n) return "展期已經到 8/31 為止，之後就沒有場次了。";
+  const diff = Math.round((n - new Date(d.getFullYear(),d.getMonth(),d.getDate()))/86400000);
+  const when = diff===1 ? "明天" : (n.getMonth()+1)+"/"+n.getDate()+"（"+WD[n.getDay()]+"）";
+  const close = (n.getDay()>=2 && n.getDay()<=6) ? "21:00" : "17:00";
+  return "下一個開館日是 <b>"+when+"</b>，08:30 – "+close+"。";
+}
+
+function libStatus(d){
+  const today = ymd(d);
+  if(today > EXHIBITION_END) return {k:"end", head:"《五感山徑》已結束展出", body:"展期已於 2026/8/31 畫下句點。展覽資訊與這份攻略保留在這裡，之後有新的展再更新。"};
+  const lt = lastThursday(d);
+  if(CLOSED_DATES.indexOf(today)>=0 || ymd(lt)===today)
+    return {k:"stop", head:"今天休館", body:"每個月<b>最後一個週四</b>是清館日，不是週一，很多人在這裡踩雷。今天不要跑一趟。<br>"+nextOpenText(d)};
+  if(HOLIDAYS.indexOf(today)>=0)
+    return {k:"stop", head:"今天休館", body:"今天是國定假日，總館休館。<br>"+nextOpenText(d)};
+  const dow = d.getDay();
+  const closeM = (dow>=2 && dow<=6) ? 21*60 : 17*60;
+  const closeT = (dow>=2 && dow<=6) ? "21:00" : "17:00";
+  const openM = 8*60+30;
+  const cur = d.getHours()*60 + d.getMinutes();
+  if(cur < openM)
+    return {k:"soon", head:"今天有開，還沒開門", body:"<b>08:30</b> 開門，今天營業到 <b>"+closeT+"</b>。", meter:[openM,closeM,cur,closeT]};
+  if(cur >= closeM)
+    return {k:"closed", head:"今天已經關了", body:"今天營業到 "+closeT+"，已經結束了。<br>"+nextOpenText(d)};
+  const left = closeM - cur;
+  return {k:"open", head:"現在開館中", body:"今天營業到 <b>"+closeT+"</b>，還有 <b>"+Math.floor(left/60)+"</b> 小時 <b>"+(left%60)+"</b> 分。",
+          meter:[openM,closeM,cur,closeT]};
+}
+function paintStatus(){
+  const d = now();
+  const s = libStatus(d);
+  const card = $("#statuscard");
+  card.className = "statuscard rv in " + s.k;
+  $("#scdate").textContent = d.getFullYear()+"/"+pad(d.getMonth()+1)+"/"+pad(d.getDate())+"（"+WD[d.getDay()]+"）　"+pad(d.getHours())+":"+pad(d.getMinutes());
+  $("#schead").textContent = s.head;
+  $("#scbody").innerHTML = s.body;
+  const m = $("#scmeter");
+  if(s.meter){
+    const a=s.meter[0], b=s.meter[1], c=s.meter[2];
+    m.hidden=false;
+    $("#scend").textContent = s.meter[3];
+    $("#sclbl").textContent = c<a ? "尚未開館" : "現在";
+    setTimeout(()=>{ $("#scfill").style.width = Math.max(0,Math.min(100,(c-a)/(b-a)*100))+"%"; },120);
+  } else m.hidden=true;
+  if(s.k==="end") document.body.classList.add("ended");
+}
+paintStatus();
+setInterval(paintStatus, 30000);
+
+(function(){
+  const box=$("#closedchips"); const t=now();
+  const up = CLOSED_DATES.filter(x=> x>=ymd(t));
+  const list = up.length? up : CLOSED_DATES;
+  box.innerHTML = list.map(x=>{ const d=parse(x); return '<span class="daychip">'+(d.getMonth()+1)+"/"+d.getDate()+"（"+WD[d.getDay()]+"）</span>"; }).join("");
+})();
+
+/* ==================== S3 檢查清單 ==================== */
+(function(){
+  const KEY="wgsj_check_";
+  const items=$$(".chk"), fill=$("#ckfill"), txt=$("#cktext"), good=$("#allgood");
+  function sync(){
+    const n = items.filter(i=>i.classList.contains("done")).length;
+    fill.style.width=(n/items.length*100)+"%";
+    txt.textContent=n+" / "+items.length;
+    good.classList.toggle("show", n===items.length);
+    if(n===items.length) track("checklist_complete");
+  }
+  items.forEach(el=>{
+    const k=KEY+el.dataset.k;
+    if(localStorage.getItem(k)==="1"){ el.classList.add("done"); el.setAttribute("aria-pressed","true"); }
+    el.addEventListener("click",()=>{
+      const on=!el.classList.contains("done");
+      el.classList.toggle("done",on);
+      el.setAttribute("aria-pressed",String(on));
+      try{ on? localStorage.setItem(k,"1") : localStorage.removeItem(k); }catch(e){}
+      if(on && !RM) burst(el);
+      sync();
+    });
+  });
+  sync();
+  function burst(el){
+    const r=el.getBoundingClientRect();
+    for(let i=0;i<10;i++){
+      const s=document.createElement("span");
+      const ang=Math.random()*Math.PI*2, dist=26+Math.random()*34;
+      s.style.cssText="position:fixed;left:"+(r.left+29)+"px;top:"+(r.top+30)+"px;width:6px;height:6px;border-radius:50%;pointer-events:none;z-index:200;background:"+
+        ["#3D7A4E","#7A8C6B","#D9822B","#A8B79A"][i%4]+";transition:transform .7s cubic-bezier(.2,.8,.3,1),opacity .7s";
+      document.body.appendChild(s);
+      requestAnimationFrame(()=>{
+        s.style.transform="translate("+Math.cos(ang)*dist+"px,"+Math.sin(ang)*dist+"px) scale(0)";
+        s.style.opacity="0";
+      });
+      setTimeout(()=>s.remove(),750);
+    }
+  }
+})();
+
+/* ==================== S4 手風琴 ==================== */
+(function(){
+  const acc=$("#acc");
+  acc.innerHTML = TRAILS.map((t,i)=>(
+    '<div class="item" data-i="'+i+'">'+
+      '<button class="item-h" aria-expanded="false">'+
+        '<span class="icoshell"><svg viewBox="0 0 24 24">'+t.icon+'</svg></span>'+
+        '<span class="txt"><span class="n">'+t.n+'</span><span class="ttl">'+t.name+'</span><span class="hint">'+t.hint+'</span></span>'+
+        '<svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>'+
+      '</button>'+
+      '<div class="item-b"><div class="item-bi">'+
+        '<div class="blk"><span class="bt">現場有什麼</span><p>'+t.has+'</p></div>'+
+        '<div class="blk miss"><span class="bt">容易錯過</span><p>'+t.miss+'</p></div>'+
+        '<div class="blk kidq"><span class="bt">給孩子的問題</span><q>'+t.q+'</q></div>'+
+      '</div></div>'+
+    '</div>'
+  )).join("");
+  $$(".item",acc).forEach(item=>{
+    const h=$(".item-h",item), b=$(".item-b",item);
+    h.addEventListener("click",()=>{
+      const open=!item.classList.contains("open");
+      $$(".item",acc).forEach(o=>{ if(o!==item){o.classList.remove("open"); $(".item-b",o).style.maxHeight=null; $(".item-h",o).setAttribute("aria-expanded","false");} });
+      item.classList.toggle("open",open);
+      h.setAttribute("aria-expanded",String(open));
+      b.style.maxHeight = open ? (b.scrollHeight+"px") : null;
+      if(open){
+        track("trail_open",{trail:TRAILS[+item.dataset.i].name});
+        setTimeout(()=>{ const r=item.getBoundingClientRect(); if(r.top<56) window.scrollBy({top:r.top-70,behavior:RM?"auto":"smooth"}); },420);
+      }
+    });
+  });
+  window.addEventListener("resize",()=>{ $$(".item.open",acc).forEach(o=>{ const b=$(".item-b",o); b.style.maxHeight=b.scrollHeight+"px"; }); });
+})();
+
+/* ==================== S5 翻卡 ==================== */
+(function(){
+  const g=$("#flipgrid");
+  g.innerHTML = FLIPS.map((f,i)=>(
+    '<button class="flip" data-i="'+i+'" aria-pressed="false"><div class="flip-in">'+
+      '<div class="face front"><span class="num">'+f.n+'</span><span class="q">'+f.q+'</span><span class="tap"><i></i>點一下看解讀方式</span></div>'+
+      '<div class="face back"><p>'+f.a+'</p><span class="re">再點一下翻回去</span></div>'+
+    '</div></button>'
+  )).join("");
+  $$(".flip",g).forEach(c=>{
+    c.addEventListener("click",()=>{
+      const on=!c.classList.contains("on");
+      c.classList.toggle("on",on);
+      c.setAttribute("aria-pressed",String(on));
+      if(on) track("flip_open",{card:FLIPS[+c.dataset.i].q});
+    });
+  });
+})();
+
+/* ==================== S6 動線 ==================== */
+(function(){
+  const sw=$("#switch"), tl=$("#timeline"), meta=$("#routemeta"), prog=$("#tlprog");
+  function render(k){
+    const r=ROUTES[k];
+    meta.innerHTML='<span class="pill">'+r.time+'</span><span class="pill">'+r.tag+'</span><span class="pill">共 '+r.steps.length+' 站</span>';
+    $$(".step",tl).forEach(s=>s.remove());
+    prog.style.height="0px";
+    r.steps.forEach((s,i)=>{
+      const d=document.createElement("div");
+      d.className="step"; d.dataset.n=i+1; d.innerHTML=s;
+      d.style.animationDelay=(RM?0:i*55)+"ms";
+      tl.appendChild(d);
+    });
+    requestAnimationFrame(()=>{ setTimeout(()=>{ prog.style.height=Math.max(0,tl.scrollHeight-16)+"px"; }, RM?0:r.steps.length*55+120); });
+  }
+  $$("button",sw).forEach(b=>{
+    b.addEventListener("click",()=>{
+      $$("button",sw).forEach(o=>o.classList.remove("on"));
+      b.classList.add("on");
+      sw.classList.toggle("b", b.dataset.r==="b");
+      render(b.dataset.r);
+      track("route_switch",{route:b.dataset.r});
+    });
+  });
+  render("a");
+})();
+
+/* ==================== S7 活動 ==================== */
+(function(){
+  const today = ymd(now());
+  const upcoming = EVENTS.filter(e=> e.date >= today).sort((a,b)=> a.date===b.date ? mins(a.start)-mins(b.start) : (a.date<b.date?-1:1));
+  // 依實際時間重疊重算衝堂（不只依賴資料裡的旗標）
+  const byDay = {};
+  upcoming.forEach(e=>{ (byDay[e.date]=byDay[e.date]||[]).push(e); });
+  Object.keys(byDay).forEach(day=>{
+    const list=byDay[day];
+    list.forEach(a=>{ a._clash = list.some(b=> b!==a && mins(a.start)<mins(b.end) && mins(b.start)<mins(a.end)); });
+  });
+
+  const list=$("#eventlist"), filters=$("#filters"), clashbox=$("#clashlist");
+  const types=["全部"].concat(["生態走讀","電影","講座","說故事","工作坊","繪本劇場"].filter(t=> upcoming.some(e=>e.type===t)));
+  let active="全部";
+
+  filters.innerHTML = types.map(t=>{
+    const n = t==="全部" ? upcoming.length : upcoming.filter(e=>e.type===t).length;
+    return '<button class="fchip'+(t==="全部"?" on":"")+'" data-t="'+t+'">'+t+'<b>'+n+'</b></button>';
+  }).join("");
+
+  const ended = today > EXHIBITION_END;
+  function render(){
+    const data = active==="全部" ? upcoming : upcoming.filter(e=>e.type===active);
+    if(!upcoming.length){
+      list.innerHTML = ended
+        ? '<div class="empty">《五感山徑》已於 2026/8/31 結束展出，35 場推廣活動也都結束了。<br>想看更多台灣的野生鄰居，往下滑有頻道連結。</div>'
+        : '<div class="empty">暑假的推廣活動場次都結束了，展覽本身還開放到 8/31。</div>';
+      clashbox.style.display="none"; return;
+    }
+    if(!data.length){ list.innerHTML='<div class="empty">這個類型已經沒有還沒開始的場次了，換一個看看。</div>'; return; }
+    const days={};
+    data.forEach(e=>{ (days[e.date]=days[e.date]||[]).push(e); });
+    list.innerHTML = Object.keys(days).sort().map(day=>{
+      const d=parse(day), evs=days[day];
+      const clashN = evs.filter(e=>e._clash).length;
+      return '<div class="daygroup">'+
+        '<div class="dayhead"><span class="dd">'+(d.getMonth()+1)+"/"+pad(d.getDate())+'</span><span class="dw">週'+WD[d.getDay()]+'</span>'+
+        (clashN>1?'<span class="dc">⚠ 這天有時間打架的場次</span>':'')+'</div>'+
+        evs.map((e,i)=>(
+          '<div class="ev" data-t="'+e.type+'" style="animation-delay:'+(RM?0:i*45)+'ms">'+
+            '<div class="top"><span class="type">'+e.type+'</span><span class="time">'+e.start+'–'+e.end+'</span>'+
+              (e._clash?'<span class="clash">⚠ 與同日場次重疊</span>':'')+'</div>'+
+            '<h3>'+e.title+'</h3>'+
+            '<div class="sub2">'+
+              '<span>📍 '+e.venue+'</span>'+
+              (e.host?'<span>🎙 '+e.host+'</span>':'')+
+              (e.book?'<span>📖 '+e.book+'</span>':'')+
+            '</div>'+
+            (e.note?'<div class="pt">'+e.note+'</div>':'')+
+            '<a class="go" href="'+(LINKS[e.type]||LINKS.main)+'" target="_blank" rel="noopener" data-ev="'+e.id+'">前往官方報名頁 →</a>'+
+          '</div>'
+        )).join("")+
+      '</div>';
+    }).join("");
+    $$(".go",list).forEach(a=> a.addEventListener("click",()=> track("signup_click",{event_id:a.dataset.ev})));
+  }
+
+  $$(".fchip",filters).forEach(b=> b.addEventListener("click",()=>{
+    $$(".fchip",filters).forEach(o=>o.classList.remove("on"));
+    b.classList.add("on"); active=b.dataset.t; render(); track("event_filter",{type:active});
+  }));
+  render();
+
+  // 衝堂清單自動生成
+  const clashDays = Object.keys(byDay).filter(day=> byDay[day].some(e=>e._clash)).sort();
+  if(clashDays.length){
+    clashbox.innerHTML = '<h4>目前已知的衝堂日</h4><ul>'+ clashDays.map(day=>{
+      const d=parse(day);
+      const names = byDay[day].filter(e=>e._clash).map(e=> e.title.replace(/｜.*$/,"")+"（"+e.start+"）");
+      return '<li><b>'+(d.getMonth()+1)+"/"+pad(d.getDate())+'</b>　'+names.join("、")+'</li>';
+    }).join("")+'</ul><p style="font-size:13px;color:#8A4A0B;margin-top:9px;line-height:1.8">同一天報多場時，閱讀點數會依活動時間依序扣除，排行程前先確認自己能到場。</p>';
+  } else clashbox.style.display="none";
+})();
+
+/* ==================== S9 資訊表 ==================== */
+$("#infotable").innerHTML = INFO.map(r=>'<div class="row"><div class="k">'+r[0]+'</div><div class="v">'+r[1]+'</div></div>').join("");
+
+$$("#videolink,#channellink").forEach(a=> a.addEventListener("click",()=> track("cta_click",{id:a.id})));
+
+/* 分享 */
+$("#sharebtn").addEventListener("click", async ()=>{
+  const data={title:"《五感山徑》逛展攻略",text:"桃園市立圖書館《五感山徑》逛展攻略，免費入場，展到 8/31。",url:location.href.split("?")[0]};
+  try{
+    if(navigator.share){ await navigator.share(data); track("share",{method:"native"}); }
+    else { await navigator.clipboard.writeText(data.url); toast("網址已複製"); track("share",{method:"copy"}); }
+  }catch(e){}
+});
+
+/* ==================== 捲動：進度條 / 導覽 / 揭示 / 回頂 ==================== */
+(function(){
+  const bar=$("#bar"), nav=$("#topnav"), top=$("#top"), navscroll=$("#navscroll");
+  const secs = $$("[data-nav]");
+  navscroll.innerHTML = secs.map((s,i)=>'<button data-go="'+s.id+'">'+s.dataset.nav+'</button>').join("");
+  $$("button",navscroll).forEach(b=> b.addEventListener("click",()=>{
+    const el=document.getElementById(b.dataset.go);
+    window.scrollTo({top: el.offsetTop-54, behavior: RM?"auto":"smooth"});
+  }));
+  let ticking=false;
+  function upd(){
+    const y=window.scrollY, h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0? y/h*100:0)+"%";
+    nav.classList.toggle("on", y > window.innerHeight*0.62);
+    top.classList.toggle("on", y > window.innerHeight*1.4);
+    let cur=secs[0];
+    secs.forEach(s=>{ if(s.offsetTop-120 <= y) cur=s; });
+    $$("button",navscroll).forEach(b=>{
+      const on=b.dataset.go===cur.id;
+      b.classList.toggle("act",on);
+      if(on && b.offsetLeft < navscroll.scrollLeft || (on && b.offsetLeft+b.offsetWidth > navscroll.scrollLeft+navscroll.clientWidth))
+        navscroll.scrollTo({left:Math.max(0,b.offsetLeft-60),behavior:RM?"auto":"smooth"});
+    });
+    ticking=false;
+  }
+  window.addEventListener("scroll",()=>{ if(!ticking){ ticking=true; requestAnimationFrame(upd); } },{passive:true});
+  upd();
+  top.addEventListener("click",()=> window.scrollTo({top:0,behavior:RM?"auto":"smooth"}));
+
+  const all=$$(".rv");
+  if(!("IntersectionObserver" in window) || RM){
+    all.forEach(el=>el.classList.add("in"));
+  }else{
+    const io=new IntersectionObserver(es=>{
+      es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+    },{rootMargin:"0px 0px -8% 0px",threshold:.08});
+    all.forEach((el,i)=>{ el.style.transitionDelay=(i%4*55)+"ms"; io.observe(el); });
+    // 保險：任何已經進入視窗但沒被觸發的，捲動時補上
+    window.addEventListener("scroll",()=>{
+      all.forEach(el=>{ if(!el.classList.contains("in") && el.getBoundingClientRect().top < innerHeight*0.94) el.classList.add("in"); });
+    },{passive:true});
+  }
+})();
+
+/* ==================== Hero 視差 + 花粉 ==================== */
+(function(){
+  if(RM) return;
+  const layers=$$(".mts svg"), hero=$("#hero");
+  let tx=0,ty=0;
+  window.addEventListener("scroll",()=>{
+    const y=window.scrollY;
+    if(y>window.innerHeight) return;
+    layers.forEach(l=>{ l.style.transform="translateY("+(y*parseFloat(l.dataset.depth)*-9)+"px)"; });
+  },{passive:true});
+  hero.addEventListener("pointermove",e=>{
+    const r=hero.getBoundingClientRect();
+    tx=(e.clientX-r.width/2)/r.width; ty=(e.clientY-r.height/2)/r.height;
+    layers.forEach(l=>{ const d=parseFloat(l.dataset.depth)*620; l.style.marginLeft=(-tx*d)+"px"; });
+  });
+
+  const cv=$("#dust"), ctx=cv.getContext("2d");
+  let W,H,ps=[];
+  function size(){
+    const dpr=Math.min(devicePixelRatio||1,2);
+    W=cv.clientWidth; H=cv.clientHeight;
+    cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    ps=Array.from({length: Math.round(W*H/16000)},()=>({
+      x:Math.random()*W, y:Math.random()*H, r:.8+Math.random()*2.2,
+      vy:-(.12+Math.random()*.34), vx:(Math.random()-.5)*.3,
+      a:.18+Math.random()*.45, p:Math.random()*6.28
+    }));
+  }
+  size(); addEventListener("resize",size);
+  (function loop(){
+    ctx.clearRect(0,0,W,H);
+    ps.forEach(p=>{
+      p.p+=.016; p.y+=p.vy; p.x+=p.vx+Math.sin(p.p)*.32;
+      if(p.y<-6){ p.y=H+6; p.x=Math.random()*W; }
+      if(p.x<-6)p.x=W+6; if(p.x>W+6)p.x=-6;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.29);
+      ctx.fillStyle="rgba(122,140,107,"+(p.a*(.6+Math.sin(p.p)*.4))+")"; ctx.fill();
+    });
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* 鍵盤：左右切換動線 */
+document.addEventListener("keydown",e=>{
+  if(e.key==="ArrowLeft"||e.key==="ArrowRight"){
+    const btns=$$("#switch button");
+    const i=btns.findIndex(b=>b.classList.contains("on"));
+    const n=e.key==="ArrowRight"? Math.min(1,i+1) : Math.max(0,i-1);
+    if(n!==i && document.activeElement && document.activeElement.closest && document.activeElement.closest("#switch")) btns[n].click();
+  }
+});
+</script>
+</body>
+</html>
