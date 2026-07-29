@@ -2,6 +2,8 @@
 
 桃園市立圖書館《五感山徑：臺灣森林的感官之旅》逛展攻略一頁式網站，由 **佑在幹嘛** 製作。
 
+**正式網址：<https://wugan.zeabur.app>**
+
 - 展期：2026/07/01（三）～ 08/31（一），免費入場
 - 地點：桃園市立圖書館總館 1 樓享讀拾光、3 樓兒藝展示區
 - 官方活動頁：<https://www.typl.gov.tw/zh-tw/Activity/Content/9716>
@@ -44,7 +46,10 @@ python3 -m http.server 4173
 
 ## 部署
 
-推到 GitHub 後由 Zeabur 自動部署（靜態網站）。
+推到 GitHub 後由 Zeabur 自動部署（靜態網站），網址 <https://wugan.zeabur.app>。
+
+社群分享卡是 `og-image.png`（1200×630，程式繪製，非展場實拍）。
+`index.html` 的 `og:url` / `og:image` / `canonical` 都寫死絕對網址，**換網域時這三處要一起改**。
 
 ## 資料來源與免責
 
