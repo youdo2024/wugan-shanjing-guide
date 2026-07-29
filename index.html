@@ -8,6 +8,17 @@
 <meta property="og:title" content="《五感山徑》逛展攻略｜佑在幹嘛">
 <meta property="og:description" content="會讓你白跑一趟的資訊、現場容易錯過的東西，以及怎麼跟小孩一起看才不會走馬看花。">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="佑在幹嘛">
+<!-- 綁好正式網域後，把下面兩行換成絕對網址（例：https://你的網域/og-image.png），FB 抓圖才最穩 -->
+<meta property="og:image" content="og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="《五感山徑》逛展攻略，臺灣森林的感官之旅，桃園市立圖書館總館">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="《五感山徑》逛展攻略｜佑在幹嘛">
+<meta name="twitter:description" content="會讓你白跑一趟的資訊、現場容易錯過的東西，以及怎麼跟小孩一起看才不會走馬看花。">
+<meta name="twitter:image" content="og-image.png">
 <meta name="theme-color" content="#604C3F">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233D5A3F'/%3E%3Cpath d='M8 50 L22 26 L32 40 L42 20 L56 50 Z' fill='%23A8B79A'/%3E%3Cpath d='M8 50 L20 36 L30 48 L44 32 L56 50 Z' fill='%23FAF8F3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -253,8 +264,8 @@ h2{font-size:clamp(24px,6.4vw,31px);line-height:1.3;font-weight:900;color:var(--
 /* ============ S5 翻卡 ============ */
 #s5{background:#F4F1E6}
 .flipgrid{display:grid;gap:12px}
-.flip{perspective:1400px;height:210px;cursor:pointer;width:100%;text-align:left}
-.flip-in{position:relative;width:100%;height:100%;transition:transform .68s var(--ease);transform-style:preserve-3d}
+.flip{perspective:1400px;min-height:210px;cursor:pointer;width:100%;text-align:left;display:block}
+.flip-in{display:block;position:relative;width:100%;height:100%;transition:transform .68s var(--ease);transform-style:preserve-3d}
 .flip.on .flip-in{transform:rotateY(180deg)}
 .face{
   position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
@@ -266,8 +277,8 @@ h2{font-size:clamp(24px,6.4vw,31px);line-height:1.3;font-weight:900;color:var(--
 .front .tap{font-size:12px;color:var(--moss);display:flex;align-items:center;gap:6px}
 .front .tap i{width:16px;height:16px;border:2px solid var(--moss);border-radius:50%;animation:pulse 2s infinite}
 .back{background:linear-gradient(140deg,var(--green),#2E4630);color:#fff;transform:rotateY(180deg);border:1px solid var(--green)}
-.back p{font-size:14.5px;line-height:1.85}
-.back .re{margin-top:12px;font-size:11.5px;opacity:.75;letter-spacing:.1em}
+.back .ans{display:block;font-size:14.5px;line-height:1.85}
+.back .re{display:block;margin-top:12px;font-size:11.5px;opacity:.75;letter-spacing:.1em}
 .flipicon{position:absolute;top:14px;right:16px;font-size:11px;letter-spacing:.14em;color:var(--moss)}
 
 /* ============ S6 動線 ============ */
@@ -427,7 +438,7 @@ body.ended .cdrow,body.ended #s7 .filters{display:none}
 @media(min-width:720px){
   .sec{padding:76px 0}
   .flipgrid{grid-template-columns:repeat(3,1fr)}
-  .flip{height:250px}
+  .flip{min-height:250px}
   body{font-size:16.5px}
 }
 @media(max-width:400px){
@@ -478,9 +489,9 @@ body.ended .cdrow,body.ended #s7 .filters{display:none}
     <h1 class="big"><span class="l"><span>《五感山徑》</span></span><span class="l"><span>逛展攻略</span></span></h1>
     <p class="sub">臺灣森林的感官之旅｜1F 享讀拾光・3F 兒藝展示區</p>
     <div class="cdrow" id="cdrow">
-      <small>展覽結束倒數</small>
+      <small id="cdpre">展覽結束倒數</small>
       <b id="cdnum">--</b>
-      <small>天</small>
+      <small id="cdpost">天</small>
       <span class="free">免費入場</span>
     </div>
     <p class="lead">這份攻略不重複官方文宣。這裡只放三種東西：會讓你白跑一趟的資訊、現場容易錯過的東西，以及怎麼跟小孩一起看才不會走馬看花。</p>
@@ -513,8 +524,8 @@ body.ended .cdrow,body.ended #s7 .filters{display:none}
       <div class="mini"><div class="k">週日、週一</div><div class="v">08:30 – 17:00</div></div>
     </div>
 
-    <div class="warnbox rv">
-      這個暑假還有兩個<b>清館日</b>，這兩天不要去：
+    <div class="warnbox rv" id="closedbox">
+      <span id="closedtext"></span>
       <div class="daychips" id="closedchips"></div>
     </div>
   </div>
@@ -707,7 +718,6 @@ body.ended .cdrow,body.ended #s7 .filters{display:none}
 "use strict";
 /* ==================== 資料 ==================== */
 const EXHIBITION_END = "2026-08-31";
-const OPEN_START = "2026-07-01";
 const CLOSED_DATES = ["2026-07-30","2026-08-27"];      // 清館日
 const HOLIDAYS = [];                                    // 國定假日（需手動維護）
 const LINKS = {
@@ -843,6 +853,13 @@ function track(name,detail){
   if(days < 0){ document.body.classList.add("ended"); return; }
   const target = Math.max(days,0);
   if(target<=7) $("#cdrow").classList.add("urgent");
+  if(target===0){                       // 8/31 當天
+    $("#cdpre").textContent="今天是展覽";
+    num.textContent="最後";
+    num.style.fontSize="20px";
+    $("#cdpost").textContent="一天";
+    return;
+  }
   if(RM){ num.textContent=target; return; }
   let cur=0; const step = Math.max(1,Math.round(target/28));
   const iv=setInterval(()=>{ cur=Math.min(cur+step,target); num.textContent=cur; if(cur>=target) clearInterval(iv); },28);
@@ -916,36 +933,51 @@ paintStatus();
 setInterval(paintStatus, 30000);
 
 (function(){
-  const box=$("#closedchips"); const t=now();
-  const up = CLOSED_DATES.filter(x=> x>=ymd(t));
-  const list = up.length? up : CLOSED_DATES;
-  box.innerHTML = list.map(x=>{ const d=parse(x); return '<span class="daychip">'+(d.getMonth()+1)+"/"+d.getDate()+"（"+WD[d.getDay()]+"）</span>"; }).join("");
+  const box=$("#closedchips"), wrap=$("#closedbox"), txt=$("#closedtext");
+  const t=now(), today=ymd(t);
+  // 只列出「之後」還會遇到的清館日。今天就是清館日的話，狀態卡已經講得夠大聲了
+  const up = CLOSED_DATES.filter(x=> x>today && x<=EXHIBITION_END);
+  if(!up.length){ wrap.style.display="none"; return; }
+  const CN=["","一","兩","三","四","五","六"];
+  txt.innerHTML = up.length===1
+    ? "展期內還有一個<b>清館日</b>，這天不要去："
+    : "展期內還有"+(CN[up.length]||up.length)+"個<b>清館日</b>，這幾天不要去：";
+  box.innerHTML = up.map(x=>{ const d=parse(x); return '<span class="daychip">'+(d.getMonth()+1)+"/"+d.getDate()+"（"+WD[d.getDay()]+"）</span>"; }).join("");
 })();
 
 /* ==================== S3 檢查清單 ==================== */
 (function(){
   const KEY="wgsj_check_";
   const items=$$(".chk"), fill=$("#ckfill"), txt=$("#cktext"), good=$("#allgood");
-  function sync(){
+  // localStorage 在無痕模式或被停用時可能直接丟例外，全部包起來
+  const store={
+    get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+    set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} },
+    del(k){ try{ localStorage.removeItem(k); }catch(e){} }
+  };
+  let wasComplete=false;               // 只在「從沒完成變成完成」時送事件，避免每次開頁都灌一次
+  function sync(fromUser){
     const n = items.filter(i=>i.classList.contains("done")).length;
+    const done = n===items.length;
     fill.style.width=(n/items.length*100)+"%";
     txt.textContent=n+" / "+items.length;
-    good.classList.toggle("show", n===items.length);
-    if(n===items.length) track("checklist_complete");
+    good.classList.toggle("show", done);
+    if(done && !wasComplete && fromUser) track("checklist_complete");
+    wasComplete=done;
   }
   items.forEach(el=>{
     const k=KEY+el.dataset.k;
-    if(localStorage.getItem(k)==="1"){ el.classList.add("done"); el.setAttribute("aria-pressed","true"); }
+    if(store.get(k)==="1"){ el.classList.add("done"); el.setAttribute("aria-pressed","true"); }
     el.addEventListener("click",()=>{
       const on=!el.classList.contains("done");
       el.classList.toggle("done",on);
       el.setAttribute("aria-pressed",String(on));
-      try{ on? localStorage.setItem(k,"1") : localStorage.removeItem(k); }catch(e){}
+      on? store.set(k,"1") : store.del(k);
       if(on && !RM) burst(el);
-      sync();
+      sync(true);
     });
   });
-  sync();
+  sync(false);
   function burst(el){
     const r=el.getBoundingClientRect();
     for(let i=0;i<10;i++){
@@ -981,7 +1013,11 @@ setInterval(paintStatus, 30000);
     '</div>'
   )).join("");
   $$(".item",acc).forEach(item=>{
-    const h=$(".item-h",item), b=$(".item-b",item);
+    const h=$(".item-h",item), b=$(".item-b",item), inner=$(".item-bi",item);
+    // 網頁字體晚一步載入或視窗改變時，展開中的高度要跟著重算，不然文字會被裁掉
+    if(window.ResizeObserver){
+      new ResizeObserver(()=>{ if(item.classList.contains("open")) b.style.maxHeight=b.scrollHeight+"px"; }).observe(inner);
+    }
     h.addEventListener("click",()=>{
       const open=!item.classList.contains("open");
       $$(".item",acc).forEach(o=>{ if(o!==item){o.classList.remove("open"); $(".item-b",o).style.maxHeight=null; $(".item-h",o).setAttribute("aria-expanded","false");} });
@@ -995,18 +1031,23 @@ setInterval(paintStatus, 30000);
     });
   });
   window.addEventListener("resize",()=>{ $$(".item.open",acc).forEach(o=>{ const b=$(".item-b",o); b.style.maxHeight=b.scrollHeight+"px"; }); });
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>{
+    $$(".item.open",acc).forEach(o=>{ const b=$(".item-b",o); b.style.maxHeight=b.scrollHeight+"px"; });
+  });
 })();
 
 /* ==================== S5 翻卡 ==================== */
 (function(){
   const g=$("#flipgrid");
+  // button 內只能放行內元素，所以 face 用 span 而不是 div
   g.innerHTML = FLIPS.map((f,i)=>(
-    '<button class="flip" data-i="'+i+'" aria-pressed="false"><div class="flip-in">'+
-      '<div class="face front"><span class="num">'+f.n+'</span><span class="q">'+f.q+'</span><span class="tap"><i></i>點一下看解讀方式</span></div>'+
-      '<div class="face back"><p>'+f.a+'</p><span class="re">再點一下翻回去</span></div>'+
-    '</div></button>'
+    '<button class="flip" data-i="'+i+'" aria-pressed="false"><span class="flip-in">'+
+      '<span class="face front"><span class="num">'+f.n+'</span><span class="q">'+f.q+'</span><span class="tap"><i></i>點一下看解讀方式</span></span>'+
+      '<span class="face back"><span class="ans">'+f.a+'</span><span class="re">再點一下翻回去</span></span>'+
+    '</span></button>'
   )).join("");
-  $$(".flip",g).forEach(c=>{
+  const cards=$$(".flip",g);
+  cards.forEach(c=>{
     c.addEventListener("click",()=>{
       const on=!c.classList.contains("on");
       c.classList.toggle("on",on);
@@ -1014,6 +1055,27 @@ setInterval(paintStatus, 30000);
       if(on) track("flip_open",{card:FLIPS[+c.dataset.i].q});
     });
   });
+  // 兩面都是絕對定位，高度必須自己量。窄螢幕（如 iPhone SE 320px）背面文字最長的那張
+  // 原本會被切掉，這裡取全部卡片中最高的那一面當統一高度。
+  function fit(){
+    cards.forEach(c=>c.style.minHeight="");
+    let max=0;
+    cards.forEach(c=>{
+      $$(".face",c).forEach(f=>{
+        const cs=getComputedStyle(f);
+        let h=parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom)+2;
+        $$(":scope > *",f).forEach(el=>{ h+=el.getBoundingClientRect().height; });
+        // front 是 flex column 有 gap
+        if(f.classList.contains("front")) h+=parseFloat(cs.gap||0)*2;
+        else h+=12;
+        max=Math.max(max,h);
+      });
+    });
+    if(max>0) cards.forEach(c=>c.style.minHeight=Math.ceil(max)+"px");
+  }
+  fit();
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  let rt; window.addEventListener("resize",()=>{ clearTimeout(rt); rt=setTimeout(fit,150); });
 })();
 
 /* ==================== S6 動線 ==================== */
@@ -1142,26 +1204,19 @@ $("#sharebtn").addEventListener("click", async ()=>{
     const el=document.getElementById(b.dataset.go);
     window.scrollTo({top: el.offsetTop-54, behavior: RM?"auto":"smooth"});
   }));
-  let ticking=false;
-  function upd(){
-    const y=window.scrollY, h=document.documentElement.scrollHeight-window.innerHeight;
-    bar.style.width=(h>0? y/h*100:0)+"%";
-    nav.classList.toggle("on", y > window.innerHeight*0.62);
-    top.classList.toggle("on", y > window.innerHeight*1.4);
-    let cur=secs[0];
-    secs.forEach(s=>{ if(s.offsetTop-120 <= y) cur=s; });
-    $$("button",navscroll).forEach(b=>{
-      const on=b.dataset.go===cur.id;
-      b.classList.toggle("act",on);
-      if(on && b.offsetLeft < navscroll.scrollLeft || (on && b.offsetLeft+b.offsetWidth > navscroll.scrollLeft+navscroll.clientWidth))
-        navscroll.scrollTo({left:Math.max(0,b.offsetLeft-60),behavior:RM?"auto":"smooth"});
-    });
-    ticking=false;
+  const btns=$$("button",navscroll);
+  // 章節位置快取，避免每一幀都讀 offsetTop 造成重排
+  let offsets=[], pageH=1;
+  function measure(){
+    offsets = secs.map(s=>s.offsetTop);
+    pageH = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
   }
-  window.addEventListener("scroll",()=>{ if(!ticking){ ticking=true; requestAnimationFrame(upd); } },{passive:true});
-  upd();
-  top.addEventListener("click",()=> window.scrollTo({top:0,behavior:RM?"auto":"smooth"}));
+  measure();
+  window.addEventListener("resize",measure);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
 
+  // 還沒揭示的 .rv，捲動時一起處理（併進 rAF，全部揭示後自動停手）
+  let pending = [];
   const all=$$(".rv");
   if(!("IntersectionObserver" in window) || RM){
     all.forEach(el=>el.classList.add("in"));
@@ -1170,11 +1225,52 @@ $("#sharebtn").addEventListener("click", async ()=>{
       es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
     },{rootMargin:"0px 0px -8% 0px",threshold:.08});
     all.forEach((el,i)=>{ el.style.transitionDelay=(i%4*55)+"ms"; io.observe(el); });
-    // 保險：任何已經進入視窗但沒被觸發的，捲動時補上
-    window.addEventListener("scroll",()=>{
-      all.forEach(el=>{ if(!el.classList.contains("in") && el.getBoundingClientRect().top < innerHeight*0.94) el.classList.add("in"); });
-    },{passive:true});
+    pending = all.slice();
   }
+
+  let ticking=false, lastId="";
+  function upd(){
+    const y=window.scrollY;
+    bar.style.width=(y/pageH*100)+"%";
+    nav.classList.toggle("on", y > window.innerHeight*0.62);
+    top.classList.toggle("on", y > window.innerHeight*1.4);
+
+    let idx=0;
+    for(let i=0;i<offsets.length;i++){ if(offsets[i]-120 <= y) idx=i; }
+    const curId = secs[idx].id;
+    if(curId!==lastId){                       // 只在章節真的換了才動導覽列，不然 smooth scroll 會每幀互相打架
+      lastId=curId;
+      btns.forEach(b=>b.classList.toggle("act", b.dataset.go===curId));
+      const b=btns[idx];
+      if(b && (b.offsetLeft < navscroll.scrollLeft || b.offsetLeft+b.offsetWidth > navscroll.scrollLeft+navscroll.clientWidth))
+        navscroll.scrollTo({left:Math.max(0,b.offsetLeft-60),behavior:RM?"auto":"smooth"});
+    }
+
+    if(pending.length){                       // IntersectionObserver 的保險絲
+      const vh=window.innerHeight;
+      pending = pending.filter(el=>{
+        if(el.classList.contains("in")) return false;
+        if(el.getBoundingClientRect().top < vh*0.94){ el.classList.add("in"); return false; }
+        return true;
+      });
+    }
+    ticking=false;
+  }
+  window.addEventListener("scroll",()=>{ if(!ticking){ ticking=true; requestAnimationFrame(upd); } },{passive:true});
+  upd();
+  top.addEventListener("click",()=> window.scrollTo({top:0,behavior:RM?"auto":"smooth"}));
+})();
+
+/* ==================== 跨日／回到分頁時的資料更新 ==================== */
+(function(){
+  const loadedDay = ymd(now());
+  function check(){
+    if(document.hidden) return;
+    paintStatus();                    // 狀態卡立刻回到正確時間，不用等 30 秒
+    if(ymd(now())!==loadedDay) location.reload();   // 跨過午夜就整頁重算，避免活動清單留著昨天的資料
+  }
+  document.addEventListener("visibilitychange",check);
+  window.addEventListener("pageshow",e=>{ if(e.persisted) check(); });
 })();
 
 /* ==================== Hero 視差 + 花粉 ==================== */
@@ -1187,17 +1283,22 @@ $("#sharebtn").addEventListener("click", async ()=>{
     if(y>window.innerHeight) return;
     layers.forEach(l=>{ l.style.transform="translateY("+(y*parseFloat(l.dataset.depth)*-9)+"px)"; });
   },{passive:true});
-  hero.addEventListener("pointermove",e=>{
-    const r=hero.getBoundingClientRect();
-    tx=(e.clientX-r.width/2)/r.width; ty=(e.clientY-r.height/2)/r.height;
-    layers.forEach(l=>{ const d=parseFloat(l.dataset.depth)*620; l.style.marginLeft=(-tx*d)+"px"; });
-  });
+  // 只在真的有滑鼠的裝置做游標視差；手機用手指捲動時 pointermove 會亂跳
+  if(window.matchMedia("(hover:hover) and (pointer:fine)").matches){
+    hero.addEventListener("pointermove",e=>{
+      if(e.pointerType && e.pointerType!=="mouse") return;
+      const r=hero.getBoundingClientRect();
+      tx=(e.clientX-r.width/2)/r.width; ty=(e.clientY-r.height/2)/r.height;
+      layers.forEach(l=>{ const d=parseFloat(l.dataset.depth)*620; l.style.marginLeft=(-tx*d)+"px"; });
+    });
+  }
 
   const cv=$("#dust"), ctx=cv.getContext("2d");
   let W,H,ps=[];
   function size(){
     const dpr=Math.min(devicePixelRatio||1,2);
     W=cv.clientWidth; H=cv.clientHeight;
+    if(!W||!H) return;
     cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
     ps=Array.from({length: Math.round(W*H/16000)},()=>({
       x:Math.random()*W, y:Math.random()*H, r:.8+Math.random()*2.2,
@@ -1205,8 +1306,20 @@ $("#sharebtn").addEventListener("click", async ()=>{
       a:.18+Math.random()*.45, p:Math.random()*6.28
     }));
   }
-  size(); addEventListener("resize",size);
-  (function loop(){
+  size();
+  // 手機捲動時網址列縮放會不停觸發 resize，做個防抖免得粒子一直重生
+  let rt; addEventListener("resize",()=>{ clearTimeout(rt); rt=setTimeout(size,200); });
+
+  // 捲離首屏或切到別的分頁就停掉動畫，不要一直吃電
+  let visible=true, running=false;
+  if(window.IntersectionObserver){
+    new IntersectionObserver(es=>{ visible=es[0].isIntersecting; start(); },{threshold:0}).observe(hero);
+  }
+  document.addEventListener("visibilitychange",start);
+  function active(){ return visible && !document.hidden; }
+  function start(){ if(active() && !running){ running=true; requestAnimationFrame(loop); } }
+  function loop(){
+    if(!active()){ running=false; return; }
     ctx.clearRect(0,0,W,H);
     ps.forEach(p=>{
       p.p+=.016; p.y+=p.vy; p.x+=p.vx+Math.sin(p.p)*.32;
@@ -1216,7 +1329,8 @@ $("#sharebtn").addEventListener("click", async ()=>{
       ctx.fillStyle="rgba(122,140,107,"+(p.a*(.6+Math.sin(p.p)*.4))+")"; ctx.fill();
     });
     requestAnimationFrame(loop);
-  })();
+  }
+  start();
 })();
 
 /* 鍵盤：左右切換動線 */
