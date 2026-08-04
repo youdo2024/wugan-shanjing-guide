@@ -31,7 +31,8 @@
 | **保留**直向橡皮筋回彈 | 那是 iOS 原生手感。要擋的是橫向捲動區傳遞手勢，已用 `overscroll-behavior-x:contain` 各自處理 |
 | 沒有做觸覺回饋（haptics） | iOS Safari 沒有 Vibration API；社群流傳的 `<input type="checkbox" switch>` 觸發法已被 iOS 26.5 修掉，現在多數使用者用不到 |
 
-`manifest.webmanifest` + `apple-touch-icon.png` 讓「加入主畫面」能用（`display:standalone`）。
+`manifest.json` + `apple-touch-icon.png` 讓「加入主畫面」能用（`display:standalone`）。
+副檔名刻意用 `.json` 不用 `.webmanifest`，因為 Zeabur 的靜態伺服器把 `.webmanifest` 回成 `text/plain`，Chrome 會拒收。
 `apple-mobile-web-app-capable` 這個舊 meta 已被官方標為過時，故意不加。
 
 ## 維護
