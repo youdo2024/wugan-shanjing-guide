@@ -22,11 +22,12 @@
 <meta name="twitter:description" content="會讓你白跑一趟的資訊、現場容易錯過的東西，以及怎麼跟小孩一起看才不會走馬看花。">
 <meta name="twitter:image" content="https://wugan.zeabur.app/og-image.png">
 <link rel="canonical" href="https://wugan.zeabur.app/">
-<meta name="theme-color" content="#604C3F">
+<!-- Safari 26 起會忽略 theme-color，狀態列改為取樣 fixed/sticky 元素的底色。這行保留給 Android Chrome -->
+<meta name="theme-color" content="#FAF8F3">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233D5A3F'/%3E%3Cpath d='M8 50 L22 26 L32 40 L42 20 L56 50 Z' fill='%23A8B79A'/%3E%3Cpath d='M8 50 L20 36 L30 48 L44 32 L56 50 Z' fill='%23FAF8F3'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-title" content="五感山徑攻略">
 <style>
 /* ============ 基礎 ============ */
 :root{
@@ -47,52 +48,98 @@
   --sh:0 2px 10px rgba(67,53,43,.07);
   --sh-l:0 12px 34px rgba(67,53,43,.14);
   --ease:cubic-bezier(.22,1,.36,1);
+  /* iPhone 上直接吃到 SF Pro + 蘋方，不再等外部字體，第一次繪製就是對的樣子 */
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang TC","Noto Sans TC","Helvetica Neue","Microsoft JhengHei",system-ui,sans-serif;
+  /* 瀏海與 Home Indicator 的安全距離，沒有的裝置一律是 0 */
+  --sat:env(safe-area-inset-top,0px);
+  --sab:env(safe-area-inset-bottom,0px);
+  --sal:env(safe-area-inset-left,0px);
+  --sar:env(safe-area-inset-right,0px);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{
+  /* 不在這裡設 scroll-behavior:smooth。Safari 15.4 起它會攔截 JS 的捲動指令，
+     而且會讓每一次程式捲動都變成動畫，跟 iOS 的慣性捲動打架。
+     需要平滑的地方一律由 JS 明確帶 behavior:"smooth" */
+  -webkit-text-size-adjust:100%;
+  background:var(--cream);          /* iOS 26 的根層若是透明會退回白色，上下會出現白條 */
+  /* 直向的橡皮筋回彈是 iOS 原生的手感，刻意保留不動。
+     真正要擋的是橫向捲動區把手勢傳給整頁，那個在各自的容器上用 overscroll-behavior-x 處理 */
+}
 body{
-  font-family:"Noto Sans TC","PingFang TC","Heiti TC",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-family:var(--font);
   background:var(--cream);color:var(--ink);
-  font-size:16px;line-height:1.8;letter-spacing:.02em;
+  font-size:16px;line-height:1.8;letter-spacing:.01em;
   overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
 }
 img,svg{display:block;max-width:100%}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 a{color:var(--green);text-underline-offset:3px}
 :focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:6px}
 
-.wrap{width:100%;max-width:680px;margin:0 auto;padding:0 20px}
+/* 可點的東西一律關掉雙擊縮放判定，點擊才會即時反應（WebKit 官方建議的 fast-tap 做法） */
+button,a,.chk,.flip,.item-h,.fchip,.abtn,.cta,.ev,.switch button{touch-action:manipulation}
+/* 純操作用的控制項再擋掉長按選字與預覽彈窗，這是原生 App 的手感 */
+button,.chk,.flip,.item-h,.fchip,.switch button,.nav-scroll button,#top,.abtn,.cta{
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
+}
+/* 這些是資訊，要讓人能長按複製 */
+.blk p,.kidq q,.poem,.intro,.row .v,footer p,.back .ans,.ev h3,.ev .sub2,.ev .pt,.sc-body,.warnbox{
+  -webkit-user-select:text;user-select:text;-webkit-touch-callout:default;
+}
+
+.wrap{
+  width:100%;max-width:680px;margin:0 auto;
+  padding-left:max(20px,var(--sal));   /* 橫向拿手機時避開瀏海 */
+  padding-right:max(20px,var(--sar));
+}
 section{position:relative}
 .sec{padding:56px 0}
 .sec + .sec{border-top:1px solid var(--line)}
+[id]{scroll-margin-top:calc(58px + var(--sat))}   /* 錨點捲動自動避開吸頂導覽列，Safari 14.1+ 支援 */
 
 /* ============ 進度條 + 導覽 ============ */
-#bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--moss),var(--green),var(--orange));z-index:90;transition:width .1s linear}
+/* 進度條本身保持透明，彩色的部分放進絕對定位的子層。
+   Safari 26 的狀態列會取樣 fixed 元素的底色，直接上漸層會讓瀏海那條變成彩色 */
+#bar{position:fixed;top:0;left:0;right:0;height:3px;z-index:90;background:transparent;pointer-events:none}
+#bar::after{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:var(--p,0%);
+  background:linear-gradient(90deg,var(--moss),var(--green),var(--orange));
+  transition:width .1s linear;
+}
 
 #topnav{
   position:fixed;top:0;left:0;right:0;z-index:80;
   background:rgba(250,248,243,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid transparent;
+  padding-top:var(--sat);              /* 加到主畫面全螢幕時不會被瀏海壓到 */
   transform:translateY(-104%);transition:transform .45s var(--ease),border-color .3s;
 }
 #topnav.on{transform:translateY(0);border-bottom-color:var(--line)}
-.nav-in{max-width:680px;margin:0 auto;padding:9px 16px;display:flex;align-items:center;gap:10px}
+.nav-in{max-width:680px;margin:0 auto;display:flex;align-items:center;gap:10px;
+  padding:9px max(16px,var(--sar)) 9px max(16px,var(--sal))}
 .nav-logo{flex:none;font-weight:900;font-size:14px;color:var(--brown);white-space:nowrap;letter-spacing:.04em;padding-right:10px;border-right:1px solid var(--line)}
-.nav-scroll{flex:1;min-width:0;display:flex;gap:6px;padding-left:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;mask-image:linear-gradient(90deg,#000 0,#000 90%,transparent)}
+.nav-scroll{flex:1;min-width:0;display:flex;gap:6px;padding-left:4px;overflow-x:auto;scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;
+  mask-image:linear-gradient(90deg,#000 0,#000 90%,transparent);
+  -webkit-mask-image:linear-gradient(90deg,#000 0,#000 90%,transparent)}
 .nav-scroll::-webkit-scrollbar{display:none}
 .nav-scroll button{
   font-size:12.5px;font-weight:500;color:var(--ink-2);white-space:nowrap;
   padding:5px 11px;border-radius:999px;transition:.25s var(--ease);border:1px solid transparent;
 }
 .nav-scroll button.act{background:var(--green);color:#fff;border-color:var(--green)}
-.nav-scroll button:hover{background:var(--cream-d)}
-.nav-scroll button.act:hover{background:var(--green)}
 
 /* ============ HERO ============ */
 #hero{
-  min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
+  min-height:100vh;                 /* 舊 Safari 用 */
+  min-height:100svh;                /* 用「小視窗」高度：網址列展開時內容也不會被吃掉，捲動中也不會像 dvh 一直重排 */
+  display:flex;flex-direction:column;justify-content:flex-end;
   position:relative;overflow:hidden;background:linear-gradient(#F6F2E7 0%,#EFEADC 46%,#E4E3D2 100%);
-  padding-bottom:58px;
+  padding-top:var(--sat);
+  padding-bottom:calc(74px + var(--sab));
 }
 #hero canvas{position:absolute;inset:0;width:100%;height:100%}
 .mts{position:absolute;left:0;right:0;bottom:0;height:62%;pointer-events:none}
@@ -113,7 +160,9 @@ h1.big .l{display:block;overflow:hidden}
 h1.big .l span{display:block;animation:rise .9s var(--ease) both}
 h1.big .l:nth-child(2) span{animation-delay:.1s}
 @keyframes rise{from{transform:translateY(105%)}to{transform:translateY(0)}}
-.sub{font-size:15px;color:var(--ink-2);font-weight:500;margin-bottom:22px;animation:fade .8s .35s both}
+.sub{font-size:15px;color:var(--ink-2);font-weight:500;margin-bottom:22px;animation:fade .8s .35s both;
+  text-wrap:balance;max-width:22em;margin-left:auto;margin-right:auto}
+h1.big,h2,.sc-head,.item-h .ttl,.ev h3,.front .q{text-wrap:balance}
 @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .cdrow{
   display:inline-flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);
@@ -132,7 +181,7 @@ h1.big .l:nth-child(2) span{animation-delay:.1s}
 }
 .by{margin-top:14px;font-size:13px;font-weight:700;color:var(--brown);animation:fade .8s .8s both}
 .scrollcue{
-  position:absolute;bottom:10px;left:50%;transform:translateX(-50%);z-index:4;
+  position:absolute;bottom:calc(10px + var(--sab));left:50%;transform:translateX(-50%);z-index:4;
   font-size:11px;letter-spacing:.2em;color:var(--ink-2);opacity:.75;
   display:flex;flex-direction:column;align-items:center;gap:5px;animation:bob 2.2s infinite;
 }
@@ -181,7 +230,6 @@ h2{font-size:clamp(24px,6.4vw,31px);line-height:1.3;font-weight:900;color:var(--
 
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
 .mini{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:13px 14px;box-shadow:var(--sh);transition:.3s var(--ease)}
-.mini:hover{transform:translateY(-3px);box-shadow:var(--sh-l)}
 .mini .k{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--moss);margin-bottom:4px}
 .mini .v{font-size:14px;font-weight:700;color:var(--brown-d);font-variant-numeric:tabular-nums;line-height:1.5}
 .warnbox{
@@ -202,7 +250,6 @@ h2{font-size:clamp(24px,6.4vw,31px);line-height:1.3;font-weight:900;color:var(--
   padding:16px 16px 16px 56px;cursor:pointer;transition:.32s var(--ease);box-shadow:var(--sh);
   text-align:left;width:100%;display:block;
 }
-.chk:hover{transform:translateY(-2px);box-shadow:var(--sh-l);border-color:var(--moss-l)}
 .chk .box{
   position:absolute;left:16px;top:17px;width:26px;height:26px;border-radius:8px;
   border:2px solid var(--moss-l);display:grid;place-items:center;transition:.3s var(--ease);
@@ -300,8 +347,6 @@ h2{font-size:clamp(24px,6.4vw,31px);line-height:1.3;font-weight:900;color:var(--
   background:#fff;border:2px solid var(--moss-l);color:var(--moss);font-size:12px;font-weight:700;
   display:grid;place-items:center;transition:.3s var(--ease);
 }
-.step:hover::before{background:var(--green);border-color:var(--green);color:#fff;transform:scale(1.12)}
-.step:hover{color:var(--brown-d)}
 .step em{font-style:normal;color:var(--green);font-weight:700}
 .meta{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
 .pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:700;color:var(--brown)}
@@ -312,17 +357,24 @@ h2{font-size:clamp(24px,6.4vw,31px);line-height:1.3;font-weight:900;color:var(--
 
 /* ============ S7 活動 ============ */
 #s7{background:#F4F1E6}
-.filters{display:flex;gap:7px;overflow-x:auto;padding:2px 20px 12px;margin:0 -20px;scrollbar-width:none}
+.filters{
+  display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;      /* iOS 慣性捲動 */
+  overscroll-behavior-x:contain;         /* 橫向滑到底不要帶動整頁或觸發返回手勢 */
+  padding:2px max(20px,var(--sar)) 12px max(20px,var(--sal));
+  margin-left:calc(-1 * max(20px,var(--sal)));
+  margin-right:calc(-1 * max(20px,var(--sar)));
+}
 .filters::-webkit-scrollbar{display:none}
 .fchip{
   white-space:nowrap;background:#fff;border:1px solid var(--line);border-radius:999px;
   padding:8px 15px;font-size:13.5px;font-weight:700;color:var(--ink-2);transition:.28s var(--ease);
 }
-.fchip:hover{border-color:var(--moss);transform:translateY(-2px)}
 .fchip.on{background:var(--brown);border-color:var(--brown);color:#fff;box-shadow:var(--sh)}
 .fchip b{font-weight:700;opacity:.55;margin-left:5px;font-size:12px}
 .daygroup{margin-bottom:22px}
-.dayhead{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;position:sticky;top:52px;z-index:5;
+.dayhead{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;position:sticky;
+  top:calc(52px + var(--sat));z-index:5;
   background:linear-gradient(#F4F1E6 72%,rgba(244,241,230,0));padding:8px 0 6px}
 .dayhead .dd{font-size:22px;font-weight:900;color:var(--brown-d);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .dayhead .dw{font-size:12.5px;font-weight:700;color:var(--moss)}
@@ -333,7 +385,6 @@ h2{font-size:clamp(24px,6.4vw,31px);line-height:1.3;font-weight:900;color:var(--
   animation:pop .45s var(--ease) both;
 }
 @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
-.ev:hover{transform:translateY(-3px);box-shadow:var(--sh-l);border-color:var(--moss-l)}
 .ev::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--moss)}
 .ev[data-t="生態走讀"]::before{background:#4E8C5A}
 .ev[data-t="電影"]::before{background:#5E6E8C}
@@ -360,7 +411,6 @@ h2{font-size:clamp(24px,6.4vw,31px);line-height:1.3;font-weight:900;color:var(--
   color:var(--green);text-decoration:none;border:1px solid rgba(61,90,63,.3);border-radius:999px;padding:6px 14px;
   transition:.25s var(--ease);
 }
-.ev .go:hover{background:var(--green);color:#fff;border-color:var(--green);gap:9px}
 .empty{background:#fff;border:1px dashed var(--moss-l);border-radius:var(--r);padding:28px 20px;text-align:center;color:var(--ink-2);font-size:15px;line-height:1.85}
 .clashlist{background:#FFF6E9;border:1px solid rgba(217,130,43,.35);border-radius:var(--r);padding:16px;margin-top:6px}
 .clashlist h4{font-size:14px;font-weight:900;color:#8A4A0B;margin-bottom:9px}
@@ -384,13 +434,10 @@ h2{font-size:clamp(24px,6.4vw,31px);line-height:1.3;font-weight:900;color:var(--
   background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.24);border-radius:14px;
   padding:16px 18px;color:#fff;transition:.3s var(--ease);
 }
-.cta:hover{background:#fff;color:var(--green);transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.2)}
 .cta .cl{display:block;font-size:15px;font-weight:700;line-height:1.5}
 .cta .cs{display:block;font-size:12.5px;opacity:.72;margin-top:2px;line-height:1.5}
 .cta.main{background:var(--orange);border-color:var(--orange)}
-.cta.main:hover{background:#fff;color:var(--orange)}
 .cta svg{width:20px;height:20px;flex:none;stroke:currentColor;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s}
-.cta:hover svg{transform:translateX(4px)}
 .stream{position:absolute;left:0;right:0;bottom:0;height:120px;opacity:.16;pointer-events:none}
 
 /* ============ S9 ============ */
@@ -407,35 +454,84 @@ h2{font-size:clamp(24px,6.4vw,31px);line-height:1.3;font-weight:900;color:var(--
   transition:.28s var(--ease);
 }
 .abtn.alt{background:#fff;color:var(--brown);border:1px solid var(--line)}
-.abtn:hover{transform:translateY(-3px);box-shadow:var(--sh-l)}
 .abtn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-footer{background:var(--brown-d);color:rgba(255,255,255,.62);padding:34px 0 46px;font-size:12.8px;line-height:1.95}
+footer{background:var(--brown-d);color:rgba(255,255,255,.62);font-size:12.8px;line-height:1.95;
+  padding:34px 0 calc(46px + var(--sab))}
 footer .fw{font-weight:900;color:#fff;font-size:15px;margin-bottom:12px;letter-spacing:.04em}
 footer p{margin-bottom:11px}
 footer hr{border:none;border-top:1px solid rgba(255,255,255,.14);margin:16px 0}
 
 /* 展覽已結束 */
-#endedbanner{display:none;background:var(--brown-d);color:#fff;text-align:center;padding:14px 20px;font-size:14px;font-weight:700;line-height:1.7}
+#endedbanner{display:none;background:var(--brown-d);color:#fff;text-align:center;font-size:14px;font-weight:700;line-height:1.7;
+  padding:calc(14px + var(--sat)) max(20px,var(--sar)) 14px max(20px,var(--sal))}
 body.ended #endedbanner{display:block}
 body.ended .cdrow,body.ended #s7 .filters{display:none}
 
 /* 回頂 */
+/* 回頂鈕：外層 fixed 但保持透明，顏色放在 ::before，避免染到 iOS 底部工具列 */
 #top{
-  position:fixed;right:16px;bottom:16px;z-index:70;width:46px;height:46px;border-radius:50%;
-  background:var(--brown);color:#fff;display:grid;place-items:center;box-shadow:var(--sh-l);
-  opacity:0;transform:scale(.6) translateY(10px);pointer-events:none;transition:.4s var(--ease);
+  position:fixed;z-index:70;width:46px;height:46px;border-radius:50%;
+  right:max(16px,var(--sar));bottom:calc(16px + var(--sab));
+  background:transparent;color:#fff;display:grid;place-items:center;
+  opacity:0;transform:scale(.6) translateY(10px);pointer-events:none;
+  transition:opacity .4s var(--ease),transform .28s var(--ease);
+}
+#top::before{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:var(--brown);box-shadow:var(--sh-l);transition:background .3s;
 }
 #top.on{opacity:1;transform:none;pointer-events:auto}
-#top:hover{background:var(--green)}
-#top svg{width:20px;height:20px;stroke:#fff;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+#top:active{transform:scale(.9)}
+#top svg{position:relative;width:20px;height:20px;stroke:#fff;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
 
 /* toast */
 #toast{
-  position:fixed;left:50%;bottom:26px;transform:translate(-50%,26px);z-index:120;
-  background:var(--brown-d);color:#fff;font-size:13.5px;font-weight:700;padding:11px 20px;border-radius:999px;
-  box-shadow:var(--sh-l);opacity:0;pointer-events:none;transition:.4s var(--ease);
+  position:fixed;left:50%;bottom:calc(26px + var(--sab));z-index:120;
+  transform:translate(-50%,26px);
+  background:transparent;color:#fff;font-size:13.5px;font-weight:600;padding:11px 20px;border-radius:999px;
+  opacity:0;pointer-events:none;transition:.4s var(--ease);
 }
+#toast::before{content:"";position:absolute;inset:0;border-radius:999px;background:var(--brown-d);box-shadow:var(--sh-l);z-index:-1}
 #toast.on{opacity:1;transform:translate(-50%,0)}
+
+
+/* ===== 指標裝置才啟用 hover =====
+   iOS 點過元素之後 :hover 會卡住不放（WebKit 已知行為），
+   所以只讓真的有滑鼠的裝置吃這些效果，觸控改用下面的 :active 回饋 ===== */
+@media (hover:hover) and (pointer:fine){
+  .nav-scroll button:hover{background:var(--cream-d)}
+  .nav-scroll button.act:hover{background:var(--green)}
+  .mini:hover{transform:translateY(-3px);box-shadow:var(--sh-l)}
+  .chk:hover{transform:translateY(-2px);box-shadow:var(--sh-l);border-color:var(--moss-l)}
+  .step:hover::before{background:var(--green);border-color:var(--green);color:#fff;transform:scale(1.12)}
+  .step:hover{color:var(--brown-d)}
+  .fchip:hover{border-color:var(--moss);transform:translateY(-2px)}
+  .ev:hover{transform:translateY(-3px);box-shadow:var(--sh-l);border-color:var(--moss-l)}
+  .ev .go:hover{background:var(--green);color:#fff;border-color:var(--green);gap:9px}
+  .cta:hover{background:#fff;color:var(--green);transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.2)}
+  .cta.main:hover{background:#fff;color:var(--orange)}
+  .cta:hover svg{transform:translateX(4px)}
+  .abtn:hover{transform:translateY(-3px);box-shadow:var(--sh-l)}
+}
+
+/* ===== 按下去的回饋 =====
+   -webkit-tap-highlight-color 已經關掉了灰色方塊，改用 iOS 原生那種「壓下去縮一下」。
+   壓下去要快（60ms）、放開要慢（回彈感），這是 UIKit 按鈕給人的節奏。 */
+.chk,.flip,.fchip,.ev,.abtn,.cta,.item-h,.switch button,.nav-scroll button,.ev .go{
+  transition-property:transform,box-shadow,background,color,border-color,opacity;
+  transition-duration:.34s;transition-timing-function:var(--ease);
+}
+.chk:active,.flip:active,.ev:active,.abtn:active,.cta:active,.item-h:active{
+  transform:scale(.975);transition-duration:.06s;
+}
+.fchip:active,.nav-scroll button:active,.switch button:active,.ev .go:active{
+  transform:scale(.93);transition-duration:.06s;
+}
+.daychip:active,.pill:active{opacity:.6}
+@media (prefers-reduced-motion:reduce){
+  .chk:active,.flip:active,.ev:active,.abtn:active,.cta:active,.item-h:active,
+  .fchip:active,.nav-scroll button:active,.switch button:active,.ev .go:active{transform:none;opacity:.7}
+}
 
 /* 桌機 */
 @media(min-width:720px){
@@ -1205,7 +1301,8 @@ $("#sharebtn").addEventListener("click", async ()=>{
   navscroll.innerHTML = secs.map((s,i)=>'<button data-go="'+s.id+'">'+s.dataset.nav+'</button>').join("");
   $$("button",navscroll).forEach(b=> b.addEventListener("click",()=>{
     const el=document.getElementById(b.dataset.go);
-    window.scrollTo({top: el.offsetTop-54, behavior: RM?"auto":"smooth"});
+    // 交給 CSS 的 scroll-margin-top 處理位移，比自己算 offset 更能對上安全區域與吸頂列
+    el.scrollIntoView({block:"start", behavior: RM?"auto":"smooth"});
   }));
   const btns=$$("button",navscroll);
   // 章節位置快取，避免每一幀都讀 offsetTop 造成重排
@@ -1234,7 +1331,7 @@ $("#sharebtn").addEventListener("click", async ()=>{
   let ticking=false, lastId="";
   function upd(){
     const y=window.scrollY;
-    bar.style.width=(y/pageH*100)+"%";
+    bar.style.setProperty("--p",(y/pageH*100)+"%");
     nav.classList.toggle("on", y > window.innerHeight*0.62);
     top.classList.toggle("on", y > window.innerHeight*1.4);
 
@@ -1260,6 +1357,8 @@ $("#sharebtn").addEventListener("click", async ()=>{
     ticking=false;
   }
   window.addEventListener("scroll",()=>{ if(!ticking){ ticking=true; requestAnimationFrame(upd); } },{passive:true});
+  // 分頁被切到背景時 rAF 會暫停，回來時把旗標歸零，避免捲動監聽卡死
+  document.addEventListener("visibilitychange",()=>{ if(!document.hidden){ ticking=false; measure(); upd(); } });
   upd();
   top.addEventListener("click",()=> window.scrollTo({top:0,behavior:RM?"auto":"smooth"}));
 })();

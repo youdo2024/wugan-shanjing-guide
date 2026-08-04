@@ -1,0 +1,20 @@
+{
+  "name": "《五感山徑》逛展攻略",
+  "short_name": "五感山徑攻略",
+  "description": "桃園市立圖書館《五感山徑》逛展攻略：今天開不開、出發前三件事、五條山徑怎麼看、還沒開始的活動場次。",
+  "lang": "zh-Hant-TW",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "id": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#FAF8F3",
+  "theme_color": "#FAF8F3",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
