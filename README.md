@@ -49,6 +49,35 @@
 
 改場次只要動 `EVENTS` 陣列，衝堂標記與類型篩選的數字都會自己重算。
 
+## 數據追蹤
+
+`index.html` 的 `<script>` 開頭有一行：
+
+```js
+const GA_ID = "";
+```
+
+把 Google Analytics 4 的評估 ID（`G-` 開頭）貼進去就開始收數字。留空時整段追蹤不會載入，
+網站照常運作、外部請求維持為零，頁尾的隱私告知也不會出現。
+
+**追蹤的事件**
+
+| 事件 | 參數 | 這個數字能回答什麼 |
+|---|---|---|
+| `page_view` | GA4 自動 | 總共多少人看過（結案報告的主數字） |
+| `library_status` | `status` | 有多少人是在**休館日**打開這頁的，也就是這頁擋掉多少次白跑一趟 |
+| `signup_click` | `event_id` | 官方報名頁的導流次數，逐場次分開算 |
+| `intent_click` | `action` | 按了導航到總館／撥打電話／官方活動頁，高意圖行為 |
+| `cta_click` | `id` | 導回展覽任務活動貼文與佑在幹嘛官網的次數 |
+| `scroll_depth` | `percent` | 讀到 25／50／75／100% 的比例，看內容有沒有被讀完 |
+| `engagement_summary` | `max_scroll_percent`, `seconds_on_page` | 離開時補送，單次瀏覽的深度與停留秒數 |
+| `checklist_complete` | — | 出發前三件事全部勾完的人數 |
+| `trail_open` / `flip_open` / `route_switch` / `event_filter` / `share` | 各自的識別 | 哪些互動真的有人用 |
+
+同一個事件在一次瀏覽裡只送一次（`scroll_depth`、`library_status`、`checklist_complete`），不會重複灌數字。
+
+**驗證埋點**：網址加 `?debug=1`，操作頁面時主控台會印出每一個事件。
+
 ## 測試
 
 網址後面加參數可以模擬任何日期時間（需用 http server 開，直接開檔案不吃參數）：

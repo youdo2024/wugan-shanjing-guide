@@ -808,6 +808,7 @@ body.ended .cdrow,body.ended #s7 .filters{display:none}
     <p>本頁資訊整理自主辦單位公開資料與媒體報導，展區內容、活動場次與名額可能調整，實際狀況以桃園市立圖書館官方公告為準。</p>
     <p>資料查證日：2026/07/28</p>
     <p>本頁由佑在幹嘛製作，與桃園市立圖書館《五感山徑》展覽合作。</p>
+    <p id="privacynote" hidden>本頁使用 Google Analytics 統計匿名的瀏覽次數與點擊，不會蒐集你的個人資料。</p>
   </div>
 </footer>
 
@@ -816,6 +817,20 @@ body.ended .cdrow,body.ended #s7 .filters{display:none}
 
 <script>
 "use strict";
+
+/* ====================================================================
+   數據追蹤設定
+   --------------------------------------------------------------------
+   把 Google Analytics 4 的「評估 ID」貼進下面這一行的引號裡，格式是 G- 開頭。
+   取得位置：analytics.google.com → 管理 → 資料串流 → 點你的網站 → 右上角評估 ID
+
+       const GA_ID = "G-XXXXXXXXXX";
+
+   留空的話整段追蹤不會載入，網站照常運作，也不會有任何外部請求。
+   想現場確認埋點有沒有觸發：網址加 ?debug=1，操作頁面時看主控台。
+   ==================================================================== */
+const GA_ID = "";
+
 /* ==================== 資料 ==================== */
 const EXHIBITION_END = "2026-08-31";
 const CLOSED_DATES = ["2026-07-30","2026-08-27"];      // 清館日
@@ -940,10 +955,37 @@ function toast(msg){
   const t=$("#toast"); t.textContent=msg; t.classList.add("on");
   clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("on"),2200);
 }
-function track(name,detail){
-  if(typeof window.gtag==="function") window.gtag("event",name,detail||{});
-  window.dataLayer=window.dataLayer||[]; window.dataLayer.push(Object.assign({event:name},detail||{}));
+/* ==================== 數據追蹤 ==================== */
+const DEBUG = QS.get("debug")==="1";
+(function(){
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+  if(!GA_ID){ if(DEBUG) console.info("[追蹤] GA_ID 還沒填，只在主控台顯示事件"); return; }
+  const s=document.createElement("script");
+  s.async=true; s.src="https://www.googletagmanager.com/gtag/js?id="+encodeURIComponent(GA_ID);
+  document.head.appendChild(s);
+  gtag("js", new Date());
+  gtag("config", GA_ID, { send_page_view:true, debug_mode:DEBUG });
+})();
+
+// 同一個事件在一次瀏覽裡只送一次，避免重複灌數字
+const _sent = new Set();
+function track(name,detail,once){
+  if(once){ const k=name+"|"+JSON.stringify(detail||{}); if(_sent.has(k)) return; _sent.add(k); }
+  const p = Object.assign({}, detail||{});
+  if(DEBUG) console.log("[追蹤]",name,p);
+  gtag("event",name,p);
 }
+// 離開頁面前把「看到哪裡」補送出去，這是結案報告裡最能說明內容有沒有被讀完的數字
+function trackFinal(){
+  if(_sent.has("__final")) return; _sent.add("__final");
+  track("engagement_summary",{
+    max_scroll_percent: window.__maxScroll||0,
+    seconds_on_page: Math.round((performance.now())/1000)
+  });
+}
+document.addEventListener("visibilitychange",()=>{ if(document.hidden) trackFinal(); });
+window.addEventListener("pagehide", trackFinal);
 
 /* ==================== S1 倒數 ==================== */
 (function(){
@@ -1028,6 +1070,9 @@ function paintStatus(){
     setTimeout(()=>{ $("#scfill").style.width = Math.max(0,Math.min(100,(c-a)/(b-a)*100))+"%"; },120);
   } else m.hidden=true;
   if(s.k==="end") document.body.classList.add("ended");
+  // 這一頁最核心的價值就是擋掉白跑一趟。記錄使用者打開時看到的是哪種狀態，
+  // 結案時可以直接說「有多少人是在休館日打開這頁的」
+  track("library_status",{status:s.k},true);
 }
 paintStatus();
 setInterval(paintStatus, 30000);
@@ -1284,7 +1329,19 @@ setInterval(paintStatus, 30000);
 /* ==================== S9 資訊表 ==================== */
 $("#infotable").innerHTML = INFO.map(r=>'<div class="row"><div class="k">'+r[0]+'</div><div class="v">'+r[1]+'</div></div>').join("");
 
-$$("#videolink,#channellink").forEach(a=> a.addEventListener("click",()=> track("cta_click",{id:a.id})));
+$("#videolink").addEventListener("click",()=> track("cta_click",{id:"展覽任務活動貼文"}));
+$("#channellink").addEventListener("click",()=> track("cta_click",{id:"佑在幹嘛官網"}));
+
+/* 只有真的啟用追蹤時才顯示告知文字 */
+if(GA_ID) $("#privacynote").hidden=false;
+
+/* S9 的高意圖動作：會按導航或撥電話的人，幾乎就是準備要去的人 */
+$$(".actbtns a").forEach(a=>{
+  const label = a.href.indexOf("google.com/maps")>=0 ? "導航到總館"
+              : a.href.indexOf("tel:")===0            ? "撥打電話"
+              : "官方活動頁";
+  a.addEventListener("click",()=> track("intent_click",{action:label}));
+});
 
 /* 分享 */
 $("#sharebtn").addEventListener("click", async ()=>{
@@ -1315,6 +1372,9 @@ $("#sharebtn").addEventListener("click", async ()=>{
   measure();
   window.addEventListener("resize",measure);
   if(document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+  // 手風琴展開、切換動線、篩選場次都會改變頁面高度，
+  // 沒重新量的話進度條到底也不會滿，捲動深度也會少算
+  if(window.ResizeObserver) new ResizeObserver(()=>{ measure(); if(!ticking){ ticking=true; requestAnimationFrame(upd); } }).observe(document.body);
 
   // 還沒揭示的 .rv，捲動時一起處理（併進 rAF，全部揭示後自動停手）
   let pending = [];
@@ -1330,9 +1390,18 @@ $("#sharebtn").addEventListener("click", async ()=>{
   }
 
   let ticking=false, lastId="";
+  const DEPTHS=[25,50,75,100]; let depthI=0;
+  window.__maxScroll=0;
   function upd(){
     const y=window.scrollY;
+    const pct=Math.min(100,Math.round(y/pageH*100));
     bar.style.setProperty("--p",(y/pageH*100)+"%");
+    // 捲動深度：看到 25/50/75/100% 各送一次，用來看內容被讀到哪
+    if(pct>window.__maxScroll) window.__maxScroll=pct;
+    while(depthI<DEPTHS.length && pct>=DEPTHS[depthI]){
+      track("scroll_depth",{percent:DEPTHS[depthI]},true);
+      depthI++;
+    }
     nav.classList.toggle("on", y > window.innerHeight*0.62);
     top.classList.toggle("on", y > window.innerHeight*1.4);
 
