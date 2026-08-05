@@ -30,6 +30,25 @@
 | fixed 元素（進度條／回頂鈕／toast）本體透明，顏色放在 `::before`／`::after` | Safari 26 的狀態列與工具列會取樣 fixed 元素的底色，直接上色會把系統列染成奇怪的顏色 |
 | **保留**直向橡皮筋回彈 | 那是 iOS 原生手感。要擋的是橫向捲動區傳遞手勢，已用 `overscroll-behavior-x:contain` 各自處理 |
 | 沒有做觸覺回饋（haptics） | iOS Safari 沒有 Vibration API；社群流傳的 `<input type="checkbox" switch>` 觸發法已被 iOS 26.5 修掉，現在多數使用者用不到 |
+| 支援深色模式 | 跟著 iPhone 系統外觀自動切換，見下一節 |
+
+## 深色模式
+
+跟著系統設定自動切換，不做手動切換鈕（iOS 使用者預期跟系統走）。
+
+所有顏色都收斂成 `:root` 的 CSS 變數，深色版只覆寫變數，不重寫任何版面規則。
+要調色請改變數，**不要在規則裡硬寫色碼**，否則深色模式會漏掉。
+
+幾個容易踩到的點：
+
+- `--head`（標題字）與 `--brown-d`（深色面）刻意拆開。深色時標題要翻白，但頁尾、結束橫幅那些深色底不能跟著翻。
+- `--green` / `--moss` 是**背景**用色，`--green-txt` / `--moss-txt` / `--ok-txt` 是**文字**用色。深色時文字版要提亮，背景版不能動，否則白字會糊掉。
+- 山稜插圖的三層與樹用 `--mt1`~`--mt4` 控制，CSS 的 `fill` 會蓋掉 SVG 的 `fill` 屬性。
+- Hero 花粉粒子顏色由 `--dust` 提供，JS 讀取變數並監聽 `prefers-color-scheme` 變化。
+- `theme-color` 有 light / dark 兩個 meta（給 Android Chrome；Safari 26 已不看這個）。
+
+**對比度**：淺色與深色各 16 項文字實測全數通過 WCAG AA。過程中發現淺色模式的苔綠標籤字原本只有 3.4:1
+（規格書 §1 要求 AA），已把 `--moss-txt` 從 `#7A8C6B` 壓深到 `#5F7154`，變成 4.8:1。
 
 `manifest.json` + `apple-touch-icon.png` 讓「加入主畫面」能用（`display:standalone`）。
 副檔名刻意用 `.json` 不用 `.webmanifest`，因為 Zeabur 的靜態伺服器把 `.webmanifest` 回成 `text/plain`，Chrome 會拒收。
